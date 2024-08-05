@@ -25,6 +25,7 @@ Change into the directory and install the required packages:
 ```bash
 cd genealogy
 npm install
+npm i --save-dev @types/node
 ```
 
 ## 3 - Create a Local Git Repository and Connect it to the Remote Github Repo
