@@ -15,6 +15,9 @@ const config = {
 			}
 		},
 		extend: {
+			backgroundImage: {
+				'collin-in-hat': "url('/Collin.jpg')"
+			},
 			colors: {
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",
