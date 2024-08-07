@@ -60,7 +60,7 @@
 					</NavLi>
 					<Dropdown class="w-full z-20">
 						<DropdownItem href="/flowbite/accordion">Accordion Examples</DropdownItem>
-						<DropdownItem href="/flowbite/drawer-form">Drawer Form Example</DropdownItem>
+						<DropdownItem href="/flowbite/drawer">Drawer Examples</DropdownItem>
 					</Dropdown>
 
 				</NavUl>
