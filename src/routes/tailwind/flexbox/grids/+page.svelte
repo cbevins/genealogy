@@ -1,6 +1,6 @@
 <script>
-    import Card from './Card.svelte'
-    import H5c from './H5c.svelte'
+    import Card from '$lib/svelte/Card.svelte'
+    import H5c from '$lib/svelte/H5c.svelte'
 </script>
 <Card>
     <H5c>Basic Grid</H5c>

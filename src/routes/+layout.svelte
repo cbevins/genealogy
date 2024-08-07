@@ -41,13 +41,24 @@
 						<DropdownItem href="/tailwind/buttons">Button Examples</DropdownItem>
 						<DropdownItem href="/tailwind/cards">Card Example</DropdownItem>
 						<DropdownItem href="/tailwind/containers">Containers Example</DropdownItem>
-						<DropdownItem href="/tailwind/flexbox-grids">Flexbox Grid Examples</DropdownItem>
+						<DropdownItem href="/tailwind/flexbox/grids">Flexbox Grid Examples</DropdownItem>
 						<DropdownItem href="/tailwind/headers">Header Examples</DropdownItem>
+						<DropdownItem href="/tailwind/navigation/headers">Navigation Responsive Header</DropdownItem>
+						<DropdownItem href="/tailwind/navigation/tabs">Navigation Tabs</DropdownItem>
 						<DropdownItem href="/tailwind/paragraphs">Paragraph Examples</DropdownItem>
 						<DropdownItem href="/tailwind/scrollable-fixed-height-table">Scrollable Fixed-height Table</DropdownItem>
 						<DropdownDivider />
 					</Dropdown>
-				
+
+										
+					<NavLi class="cursor-pointer">
+						Flowbite
+						<ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
+					</NavLi>
+					<Dropdown class="w-full z-20">
+						<DropdownItem href="/flowbite/drawer-form">Drawer Form Example</DropdownItem>
+					</Dropdown>
+
 				</NavUl>
 		</Navbar>
 	</div>
