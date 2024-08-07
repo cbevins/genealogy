@@ -37,11 +37,14 @@
 						<ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
 					</NavLi>
 					<Dropdown class="w-full z-20">
+						<DropdownItem href="/tailwind/accordians/SaadHasan">Accordians by Saad Hasan</DropdownItem>
+						<DropdownItem href="/tailwind/accordians/Zoltan">Accordians by Zoltan</DropdownItem>
 						<DropdownItem href="/tailwind/alerts">Alert Examples</DropdownItem>
 						<DropdownItem href="/tailwind/buttons">Button Examples</DropdownItem>
 						<DropdownItem href="/tailwind/cards">Card Example</DropdownItem>
 						<DropdownItem href="/tailwind/containers">Containers Example</DropdownItem>
 						<DropdownItem href="/tailwind/flexbox/grids">Flexbox Grid Examples</DropdownItem>
+						<DropdownItem href="/tailwind/forms">Forms Examples</DropdownItem>
 						<DropdownItem href="/tailwind/headers">Header Examples</DropdownItem>
 						<DropdownItem href="/tailwind/navigation/headers">Navigation Responsive Header</DropdownItem>
 						<DropdownItem href="/tailwind/navigation/tabs">Navigation Tabs</DropdownItem>
@@ -56,6 +59,7 @@
 						<ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
 					</NavLi>
 					<Dropdown class="w-full z-20">
+						<DropdownItem href="/flowbite/accordion">Accordion Examples</DropdownItem>
 						<DropdownItem href="/flowbite/drawer-form">Drawer Form Example</DropdownItem>
 					</Dropdown>
 
