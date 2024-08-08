@@ -5,6 +5,7 @@
     $: fileName = '[No file Selected]'
     $: fileSize = 0
     $: text = 'None'
+    $: outputFileName = 'output.json'
 
     $: settings0 = {email: 'email', password: 'password', name: 'name', age: 0, color: 'red'}
     $: settings1 = {email: 'email', password: 'password', name: 'name', age: 0, color: 'red'}
@@ -64,11 +65,7 @@
     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         for="file_input">Upload file</label>
     <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-        id="file_input"
-        type="file"
-        on:change={readLines}
-        bind:files
-        >
+        type="file" id="file_input" on:change={readLines} bind:files>
 </Card>
 
 <Card>
@@ -78,8 +75,6 @@
 
 <Card>
     <H5c>Settings Editior</H5c>
-    {settings0.name} is {settings0.age}
-    
 
 <form class="max-w-sm mx-auto">
     <div class="mb-5">
@@ -145,20 +140,21 @@
             {/each}
     </ul>
 
+    <div class="w-full mx-auto border-4 m-4 p-4 border-green-500">
+        <p class='p-2 text-center'>
+            <a id="dwn" href={dataUrl} download={outputFileName}
+                class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >Save Edited Settings</a>
+        </p>
 
-    <button type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Submit</button>
+        <div class="mb-5">
+            <label for="file-output" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Output File Name</label>
+            <input id="file_output" bind:value={outputFileName}
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required />
+        </div>
+    </div>
 </form>
 </Card>
 
-<Card>
-    <p class='p-2 text-center'>
-        <a id="dwn" href={dataUrl} download
-        class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-        >Save Edited Settings</a>
-    </p>
-    <p class='p-2'>
-        The settings will be downloaded to your device as <b>{dataUrl}</b>
-    </p>
-</Card>
