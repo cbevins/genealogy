@@ -23,4 +23,8 @@
     <li><a class="underline text-red-700 text-xl visited:text-blue"
             href="https://svelteui.dev/core/grid">
         SVELTEUI Docs</a>
+
+    <li><a class="underline text-red-700 text-xl visited:text-blue"
+        href="https://flowbite.com/docs/forms/file-input/">
+        Flowbite raw TailwindCSS code</a>
 </ul>

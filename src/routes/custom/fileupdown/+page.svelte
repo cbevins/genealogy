@@ -1,5 +1,7 @@
 <script>
-    import { Fileupload, Label, Helper } from 'flowbite-svelte';
+    import { Button } from 'flowbite-svelte'
+    import Card from '$lib/svelte/Card.svelte'
+    import H5c from '$lib/svelte/H5c.svelte'
 
     $: fileName = '[No file Selected]'
     $: fileSize = 0
@@ -51,25 +53,40 @@
         const text = await file.text()
         return text
     }
+
+    let files
 </script>
 
-<div class="container mx-auto border border-indigo-500 px-4">
-    <div class="flex flex-wrap mx-4">
-        <h1 class='mb-4 text-2xl md:text-2xl lg:text-2xl font-bold'>Select a Settings File</h1>
-        <input type="file" id="file-selector" accept="*" on:change={readLines}>
-        <hr>
 
-        
-        <h1  class='mb-4 text-2xl md:text-2xl lg:text-2xl font-bold'>Last Saved Settings</h1>
-        {text}
-        <hr>
-        
-        <h1 class='mb-4 text-2xl md:text-2xl lg:text-2xl font-bold'>Settings Editor</h1>
-        <p>
-            {settings1.name} is {settings1.age} years old and lives in {settings1.city}.
-        </p>
-        <hr>
-        <a id="dwn" href={dataUrl} download><h3>Save Edited Settings</h3></a>
+<Card>
+    <H5c>File Upload using Flowbite-TailwindCSS</H5c>
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        for="file_input">Upload file</label>
+    <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+        id="file_input"
+        type="file"
+        on:change={readLines}
+        bind:files
+        >
+</Card>
+
+<Card>
+    <H5c>Last Saved Settings</H5c>
+    <p class='p-4'>{text}</p>
+</Card>
+
+<Card>
+    <H5c>Settings Editior</H5c>
+    {settings1.name} is {settings1.age} years old and lives in {settings1.city}.
+</Card>
+
+<Card>
+    <p class='p-2 text-center'>
+        <a id="dwn" href={dataUrl} download
+        class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >Save Edited Settings</a>
+    </p>
+    <p class='p-2'>
         The settings will be downloaded to your device as <b>{dataUrl}</b>
-    </div>
-</div>
+    </p>
+</Card>

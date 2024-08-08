@@ -39,6 +39,7 @@
 					<Dropdown class="w-full z-20">
 						<DropdownItem href="/tailwind/accordians/SaadHasan">Accordians by Saad Hasan</DropdownItem>
 						<DropdownItem href="/tailwind/accordians/Zoltan">Accordians by Zoltan</DropdownItem>
+						<DropdownDivider />
 						<DropdownItem href="/tailwind/alerts">Alert Examples</DropdownItem>
 						<DropdownItem href="/tailwind/buttons">Button Examples</DropdownItem>
 						<DropdownItem href="/tailwind/cards">Card Example</DropdownItem>
@@ -46,11 +47,12 @@
 						<DropdownItem href="/tailwind/flexbox/grids">Flexbox Grid Examples</DropdownItem>
 						<DropdownItem href="/tailwind/forms">Forms Examples</DropdownItem>
 						<DropdownItem href="/tailwind/headers">Header Examples</DropdownItem>
+						<DropdownDivider />
 						<DropdownItem href="/tailwind/navigation/headers">Navigation Responsive Header</DropdownItem>
 						<DropdownItem href="/tailwind/navigation/tabs">Navigation Tabs</DropdownItem>
+						<DropdownDivider />
 						<DropdownItem href="/tailwind/paragraphs">Paragraph Examples</DropdownItem>
 						<DropdownItem href="/tailwind/scrollable-fixed-height-table">Scrollable Fixed-height Table</DropdownItem>
-						<DropdownDivider />
 					</Dropdown>
 
 										
@@ -61,6 +63,7 @@
 					<Dropdown class="w-full z-20">
 						<DropdownItem href="/flowbite/accordion">Accordion Examples</DropdownItem>
 						<DropdownItem href="/flowbite/drawer">Drawer Examples</DropdownItem>
+						<DropdownItem href="/flowbite/forms">Form Examples</DropdownItem>
 					</Dropdown>
 
 				</NavUl>
