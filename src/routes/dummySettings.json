@@ -1,6 +1,9 @@
 {
+    "email": "cbevins@montana.com",
+    "password": "a123",
+    "remember": true,
     "name": "Collin D Bevins",
     "age": 72,
-    "city": "Missoula, MT",
+    "color": "blue",
     "updated": "2024-07-14T19:45:06.779Z"
 }
