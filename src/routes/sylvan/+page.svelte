@@ -3,6 +3,8 @@
     import { Drawer, Button, CloseButton, Popover } from 'flowbite-svelte'
     import { UserSettingsSolid, UsersGroupSolid, UsersSolid } from 'flowbite-svelte-icons'
     import { getPersonSelectors } from '$lib/sylvan/Singletons.js'
+    import PersonProfile from './PersonProfile.svelte'
+
     import Card from '$lib/svelte/Card.svelte'
     import H5c from '$lib/svelte/H5c.svelte'
     import Selector from './Selector.svelte'
@@ -49,7 +51,6 @@
     <H5c>SYLVAN has {items.length} Persons</H5c>
     <H5c>Currently Selected Subject is <span class="font-bold">{selected.label}</span></H5c>
 
-<div>
     <Drawer transitionType="fly" {transitionParams} bind:hidden={hidden1} id="sidebar1"
     class="bg-slate-700">
         <div class="flex items-center">
@@ -62,5 +63,5 @@
         </div>
         <Selector items={items}  bind:selected={selected}/>
     </Drawer>
-    </div>
 </Card>
+<PersonProfile person={$subjectPerson}/>
