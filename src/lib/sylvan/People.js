@@ -48,13 +48,20 @@ export class People {
 
     places() { return this._data.places }
 
-    // Returns an array of {key: <string>, label: <string>} objects used by Svelecte selector component
+    // Returns an array of the following objects:
+    // {index: <number>, person: <Person>, label: <string>}
     selectors() {
-        const options = []
+        let items = []
+        let id = 0
         for (const [gedKey, person] of this.gedKeyMap().entries()) {
-            options.push({key: person.nameKey(), label: person.label()})
+            items.push({index: id++, person: person, label: person.label()})
         }
-        return options
+        items.sort(function(a, b) {return a.label.localeCompare(b.label)})
+        for(let i=0; i<items.length; i++) {
+            const item = items[i]
+            item.index = i
+        }
+        return items
     }
 
     size() { return this.gedKeyMap().size }
