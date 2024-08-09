@@ -1,6 +1,7 @@
 <script>
     import { AccordionItem, Accordion, Badge } from 'flowbite-svelte'
     import PersonPopover from './PersonPopover.svelte'
+    import EventLine from './EventLine.svelte'
 
     export let person
 
@@ -31,14 +32,14 @@
         {person.fullName()}
     </div>
     <div class="ml-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white">
-        Born: {person.birthLine()}
-        <Badge class="bg-green-700 text-slate-300">{person.birthNotes().length} Notes</Badge>
-        <Badge class="bg-green-700 text-slate-300">{person.birthSourceKeys().length} Sources</Badge>
+        <EventLine label='Born' content={person.birthLine()}
+            notes={person.birthNotes()}
+            sourceKeys={person.birthSourceKeys()} /> 
     </div>
     <div class="ml-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white">
-        Died: {person.deathLine()}
-        <Badge class="bg-green-700 text-slate-300">{person.deathNotes().length} Notes</Badge>
-        <Badge class="bg-green-700 text-slate-300">{person.deathSourceKeys().length} Sources</Badge>
+        <EventLine label='Died' content={person.deathLine()}
+            notes={person.deathNotes()}
+            sourceKeys={person.deathSourceKeys()} /> 
     </div>
     <div class="ml-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white">
         Notes: {notesStr(person.notes(), 8)}
@@ -47,7 +48,7 @@
     <div class="ml-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white">
         Source Keys: {person.sourceKeys()}
     </div>
-     -->
+-->
     <Accordion>
         <AccordionItem>
             <span slot="header">Childhood Family</span>
@@ -58,7 +59,7 @@
             <p>Mother: {person.mother().fullName()}
                 <PersonPopover trigger="mother" person={person.mother()} />
             </p>
-            <p>Siblings: {siblings.length}</p>
+            <p>{siblings.length} Siblings:</p>
             {#each siblings as sibling, i}
             <p class="pl-4">{i+1}: {sibling.fullName()}
                 <PersonPopover trigger={"sibling-"+i} person={sibling} />
@@ -70,13 +71,17 @@
         <AccordionItem>
             <span slot="header">
                 Spouse {i+1}: {spouse(family, person).fullName()}
-                <Badge class="bg-green-700 text-slate-300">{family.children().length} Children</Badge>
-            </span>
-            <p>Spouse {i+1}: {spouse(family, person).fullName()}
                 <PersonPopover trigger={"spouse-"+i} person={spouse(family, person)} />
+                <Badge class="bg-green-700 text-slate-300">
+                    {family.children().length} Children
+                </Badge>
+            </span>
+            <p>
+                <EventLine label="Union" content={family.unionLine()}
+                    notes={family.unionNotes()}
+                    sourceKeys={family.unionSourceKeys()} /> 
             </p>
-            <p>Union: {family.unionLine()} [{family.unionNotes()}] [{family.unionSourceKeys()}]</p>
-            <p>Children: {family.children().length}</p>
+            <p>{family.children().length} Children:</p>
             {#each family.children() as child, j}
                 <p class="pl-4">{j+1}: {child.fullName()}
                     <PersonPopover trigger={"child-"+i+'-'+j} person={child} />
