@@ -23,6 +23,14 @@
 					<NavLi href="/">Home</NavLi>
 
 					<NavLi class="cursor-pointer">
+						Sylvan
+						<ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
+					</NavLi>
+					<Dropdown class="w-full z-20">
+						<DropdownItem href="/sylvan">Sylvan</DropdownItem>
+					</Dropdown>
+
+					<NavLi class="cursor-pointer">
 						Collin
 						<ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
 					</NavLi>

@@ -8,7 +8,7 @@
     let filteredItems = []
 
     let searchTerm = '';
-    console.log('Selector entry:', items.length, 'items, selected=', selected)
+    console.log('Selector on entry has', items.length, 'items and selected=', selected)
 
     $: filteredItems = items.filter((item) => 
         item.label.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
@@ -22,7 +22,7 @@
     function click(e) {
         const pos1  = e.target.id.lastIndexOf('-')
         selected = items[e.target.id.substring(pos1+1)]
-        console.log(`click(): e.target.id='${e.target.id}', selected='${selected.label}'`)
+        console.log(`click(): e.target.id='${e.target.id}', selected=`, selected)
     }
 
     function changed(e) {

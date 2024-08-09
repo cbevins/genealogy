@@ -1,26 +1,32 @@
 <script>
     import { Button, Card, Modal, Popover } from 'flowbite-svelte'
     import Selector from './Selector.svelte'
-    import { personList } from './personList.js'
 
-    let openModal = false
-    
-    console.clear()
+    import { Sylvan } from '$lib/sylvan/Sylvan.js'
+    import { _gedcomData } from '$lib/gedcom/_gedcomDataRootsMagic.js'
+    const sylvan = new Sylvan(_gedcomData)
+    const people = sylvan.people()
 
-    // Items is an array of objects with at least {index: <any>, label: <string>}
     let items = []
-    // for(let i=0; i<1000; i++) items.push({index: i, label: `Item ${i}`})
-    for(let i=0; i<personList.length; i++) {
-      items.push({...personList[i], index: i})
+    let id = 0
+    for (const [gedKey, person] of people.gedKeyMap().entries()) {
+        items.push({index: id++, person: person, label: person.label()})
     }
-
+    items.sort(function(a, b) {return a.label.localeCompare(b.label)})
+    for(let i=0; i<items.length; i++) {
+        const item = items[i]
+        item.index = i
+    }
     $: selected = items[0]
+  
+    console.clear()
+    let openModal = false
 </script>
 
 <div class="container mx-auto border border-indigo-500 px-4">
   <div class="flex flex-wrap mx-4">
-  
-  <!-- Start of Column 1 -->
+
+    <!-- Start of Column 1 -->
   <div class="md:w-1/3 px-4 mb-8 md:mb-0">
     <Card>
       <h3 class="mb-4 text-md font-bold">1: Using Popover Table</h3>
