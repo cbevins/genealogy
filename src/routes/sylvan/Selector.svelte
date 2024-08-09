@@ -11,7 +11,7 @@
 
     let filteredItems = []
 
-    let searchTerm = '';
+    let searchTerm = ''
     // console.log('Selector on entry has', items.length, 'items and selected=', selected)
 
     $: filteredItems = items.filter((item) => 
@@ -26,14 +26,16 @@
     function click(e) {
         const pos1  = e.target.id.lastIndexOf('-')
         selected = items[e.target.id.substring(pos1+1)]
-        // console.log(`click(): e.target.id='${e.target.id}', selected=`, selected)
+        console.log(`click(): e.target.id='${e.target.id}', selected=`, selected)
         console.log(`subjectPerson UPDATED to '${selected.person.label()}'`)
         subjectPerson.update(() => selected.person)
     }
 
     function changed(e) {
         searchTerm = e.target.value
-        // console.log('changed(): e.target.value=', e.target.value, 'e=', e)
+        filteredItems = items.filter((item) => 
+            item.label.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+        console.log('changed(): e.target.value=', e.target.value, 'e=', e)
     }
 </script>
 
