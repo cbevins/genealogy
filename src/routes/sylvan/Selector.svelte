@@ -1,5 +1,9 @@
 <script>
     import { Badge } from 'flowbite-svelte'
+
+    // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
+    import { subjectPerson} from '$lib/sylvan/store.js'
+
     // Items is an array of objects with at least  the following fields:
     // {index: <array index>, label: <display string>}
     export let items = []
@@ -8,7 +12,7 @@
     let filteredItems = []
 
     let searchTerm = '';
-    console.log('Selector on entry has', items.length, 'items and selected=', selected)
+    // console.log('Selector on entry has', items.length, 'items and selected=', selected)
 
     $: filteredItems = items.filter((item) => 
         item.label.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
@@ -16,18 +20,20 @@
     function clear(e) {
         document.getElementById('person-search-combobox').value = ''
         searchTerm = ''
-        console.log('clear()')
+        // console.log('clear()')
     }
 
     function click(e) {
         const pos1  = e.target.id.lastIndexOf('-')
         selected = items[e.target.id.substring(pos1+1)]
-        console.log(`click(): e.target.id='${e.target.id}', selected=`, selected)
+        // console.log(`click(): e.target.id='${e.target.id}', selected=`, selected)
+        console.log(`subjectPerson UPDATED to '${selected.person.label()}'`)
+        subjectPerson.update(() => selected.person)
     }
 
     function changed(e) {
         searchTerm = e.target.value
-        console.log('changed(): e.target.value=', e.target.value, 'e=', e)
+        // console.log('changed(): e.target.value=', e.target.value, 'e=', e)
     }
 </script>
 
@@ -64,7 +70,7 @@
         </tr>
     </thead>
     <!-- Use 'max-h-*' to limit size -->
-    <tbody class="flex flex-col items-center justify-between overflow-y-scroll w-full">
+    <tbody class="flex flex-col items-center justify-between w-full">
         {#each filteredItems as item}
             <tr class="bg-sky-500 flex w-full mb-1 text-black text-center">
                 <td class="hover:bg-sky-700 w-full"
