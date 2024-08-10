@@ -14,10 +14,12 @@
 
     const items = getPersonSelectors()
     let selected = items[0]
+    let initialSelected
     // Make subjectPerson the current selection
     for(let i=0; i<items.length; i++) {
         if ($subjectPerson.label() === items[i].person.label()) {
             selected = items[i]
+            initialSelected = items[i]
             break
         }
     }
@@ -46,10 +48,9 @@
     </Button>
 </div>
 
-
 <Card>
-    <H5c>SYLVAN has {items.length} Persons</H5c>
-    <H5c>Currently Selected Subject is <span class="font-bold">{selected.label}</span></H5c>
+    <H5c>SYLVAN has {items.length} Persons: Current Subject is:</H5c>
+    <H5c><span class="font-bold">{selected.label}</span></H5c>
 
     <Drawer transitionType="fly" {transitionParams} bind:hidden={hidden1} id="sidebar1"
     class="bg-slate-700">
