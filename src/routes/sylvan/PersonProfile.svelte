@@ -1,5 +1,5 @@
 <script>
-    import { AccordionItem, Accordion, Badge } from 'flowbite-svelte'
+    import { AccordionItem, Accordion, Badge, GradientButton } from 'flowbite-svelte'
     import PersonPopover from './PersonPopover.svelte'
     import EventLine from './EventLine.svelte'
 
@@ -52,16 +52,24 @@
     <Accordion>
         <AccordionItem>
             <span slot="header">Childhood Family</span>
-            <p>Father: {person.father().fullName()}
+            <p><button class="text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
+                    on:click={()=>person=person.father()}>View</button>
+                Father: {person.father().fullName()}
                 <PersonPopover trigger="father" person={person.father()} />
             </p>
 
-            <p>Mother: {person.mother().fullName()}
+            <p><button class="text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
+                    on:click={()=>person=person.mother()}>View</button>
+                Mother: {person.mother().fullName()}
                 <PersonPopover trigger="mother" person={person.mother()} />
             </p>
+
             <p>{siblings.length} Siblings:</p>
             {#each siblings as sibling, i}
-            <p class="pl-4">{i+1}: {sibling.fullName()}
+            <p class="pl-4">
+                <button class="text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
+                    on:click={()=>person=sibling}>View</button>
+                {i+1}: {sibling.fullName()}
                 <PersonPopover trigger={"sibling-"+i} person={sibling} />
             </p>
             {/each}
@@ -70,7 +78,10 @@
         {#each families as family, i}
         <AccordionItem>
             <span slot="header">
-                Spouse {i+1}: {spouse(family, person).fullName()}
+                Family of Spouse {i+1}:
+                <button class="text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
+                    on:click={()=>person=spouse(family, person)}>View</button>
+                {spouse(family, person).fullName()}
                 <PersonPopover trigger={"spouse-"+i} person={spouse(family, person)} />
                 <Badge class="bg-green-700 text-slate-300">
                     {family.children().length} Children
@@ -83,7 +94,10 @@
             </p>
             <p>{family.children().length} Children:</p>
             {#each family.children() as child, j}
-                <p class="pl-4">{j+1}: {child.fullName()}
+                <p class="pl-4">
+                    <button class="text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
+                        on:click={()=>person=child}>View</button>
+                    {j+1}: {child.fullName()}
                     <PersonPopover trigger={"child-"+i+'-'+j} person={child} />
                 </p>
             {/each}
