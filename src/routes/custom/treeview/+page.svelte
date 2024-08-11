@@ -31,7 +31,8 @@
 
 <Card>
     <H5c>TreeView with Basic Styling</H5c>
-<TreeView tree_data={tree_data} let:item>
+    <!-- The let:item gives use local access to the TreeView named slot 'item'-->
+    <TreeView tree_data={tree_data} let:item>
     <div class="flex w-full group border-b border-b-blue-700 py-2">
         {#if item.children}
             <div class="grow">

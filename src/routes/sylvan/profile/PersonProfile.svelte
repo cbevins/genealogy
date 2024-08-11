@@ -4,7 +4,7 @@
     import EventLine from './EventLine.svelte'
 
     export let person
-    const subject = person
+    const subject = person  // preserve the original subject person
 
     function noteLines(notes) {
         let a = []
@@ -29,12 +29,15 @@
 </script>
 
 <div class="border-2 border-black mt-4 mb-4 pt-2 pb-2 rounded overflow-hidden shadow-lg shadow-slate-500 bg-blue-100">
+
+    <!-- [View Subject] button -->
     <div class="relative text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         <!-- parent <div> must be 'relative', and child <div> must be absolute -->
         <button class="absolute left-2 top-0 text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
             on:click={()=>person=subject}>View Subject</button>
         {person.fullName()}
     </div>
+
     <div class="ml-2 text-lg font-normal tracking-tight text-gray-900 dark:text-white">
         <EventLine label='Born' content={person.birthLine()}
             notes={person.birthNotes()}
