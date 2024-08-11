@@ -7,7 +7,7 @@ import { _gedcomData } from '../gedcom/_gedcomDataRootsMagic.js'
 const wlbKey = 'WilliamLongfordBevins1815'
 
 const Args = [
-    ['personlist', `displays list of all peron labels for use in a Selector Combobox`],
+    ['personlist', `displays list of all peron labels for use in a PersonSelector Combobox`],
     ['profile', `displays Person profile for '${wlbKey}'`],
     ['summary', `displays Sylvan records summary`],
 ]

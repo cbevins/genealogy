@@ -7,7 +7,7 @@
     import { page } from '$app/stores'
     import Collin from "$lib/images/Collin.jpg"
     import { getPersonSelectors } from '$lib/index.js'
-    import Selector from '$lib/svelte/Selector.svelte'
+    import PersonSelector from '$lib/svelte/PersonSelector.svelte'
 	
     // BE SURE TO DEREFERENCE STORE VALUES USING '$subjectPerson'
     import { subjectPerson } from '$lib/sylvan/store.js'
@@ -24,7 +24,7 @@
         }
     }
 
-    // Subject Selector Drawer
+    // PersonSelector Drawer
     let hidden1 = true;
     const transitionParams = {x: -320, y: 0, duration: 200, easing: sineIn}
 </script>
@@ -39,7 +39,7 @@
 		<CloseButton on:click={() => (hidden1 = true)}
 			class="mb-4 text-white dark:text-white border-4 hover:bg-slate-500"/>
 	</div>
-	<Selector items={items}  bind:selected={selected}/>
+	<PersonSelector items={items}  bind:selected={selected}/>
 </Drawer>
 
 <!-- mx-auto centers the div -->

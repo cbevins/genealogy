@@ -1,6 +1,6 @@
 <script>
     import { Button, Card, Modal, Popover } from 'flowbite-svelte'
-    import Selector from './Selector.svelte'
+    import PersonSelector from '$lib/svelte/PersonSelector.svelte'
 
     import { Sylvan } from '$lib/sylvan/Sylvan.js'
     import { _gedcomData } from '$lib/gedcom/_gedcomDataRootsMagic.js'
@@ -37,7 +37,7 @@
         <div class="grid grid-cols-12">
           <div class="col-span-4 p-3">
             <div class="space-y-2">
-              <Selector items={items}  bind:selected={selected}/>
+              <PersonSelector items={items}  bind:selected={selected}/>
             </div>
           </div>
         </div>
@@ -49,7 +49,7 @@
 <div class="md:w-1/3 px-4 mb-8 md:mb-0">
   <Card>
     <h3 class="mb-4 text-md font-bold">2: Using Always Visible Table</h3>
-      <Selector items={items}  bind:selected={selected}/>
+      <PersonSelector items={items}  bind:selected={selected}/>
   </Card>
 </div> <!-- End of column 2 -->
 
@@ -64,7 +64,7 @@
       </Button>
         <Modal title="Select a Person" size='sm' class="w-full"
             bind:open={openModal} outsideclose>
-          <Selector items={items} bind:selected={selected}/>
+          <PersonSelector items={items} bind:selected={selected}/>
         </Modal>
     </Card>
   </div>  </div> <!-- End of column 3 -->
