@@ -2,8 +2,8 @@
 	import '../app.css'
     import { sineIn } from 'svelte/easing';
     import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Dropdown, DropdownItem, DropdownDivider } from 'flowbite-svelte'
-    import { ChevronDownOutline, SearchOutline, UsersGroupSolid } from 'flowbite-svelte-icons'
-    import { Drawer, Button, CloseButton, Input } from 'flowbite-svelte'
+    import { ChevronDownOutline } from 'flowbite-svelte-icons'
+    import { Drawer, Button, CloseButton } from 'flowbite-svelte'
     import { page } from '$app/stores'
     import Collin from "$lib/images/Collin.jpg"
     import { getPersonSelectors } from '$lib/index.js'

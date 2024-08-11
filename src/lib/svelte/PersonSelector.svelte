@@ -1,14 +1,14 @@
 <script>
-    import { Badge } from 'flowbite-svelte'
+    import { Badge, Button } from 'flowbite-svelte'
 
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
-    import { subjectPerson} from '$lib/sylvan/store.js'
+    import { subjectPerson } from '$lib/sylvan/store.js'
 
     // Items is an array of objects with at least  the following fields:
     // {index: <array index>, label: <display string>}
     export let items = []
     export let selected = {index: 0, label: 'None'}
-
+    let defaultSelected = selected
     let filteredItems = []
 
     let searchTerm = ''
@@ -27,8 +27,14 @@
         const pos1  = e.target.id.lastIndexOf('-')
         selected = items[e.target.id.substring(pos1+1)]
         console.log(`click(): e.target.id='${e.target.id}', selected=`, selected)
-        console.log(`subjectPerson UPDATED to '${selected.person.label()}'`)
         subjectPerson.update(() => selected.person)
+        console.log(`subjectPerson UPDATED to '${selected.person.label()}'`)
+    }
+
+    function clickDefault() {
+        selected = defaultSelected
+        subjectPerson.update(() => selected.person)
+        console.log(`subjectPerson UPDATED to '${selected.person.label()}'`)
     }
 
     function changed(e) {
@@ -39,13 +45,16 @@
     }
 </script>
 
+<Button on:click={clickDefault}>
+    Use Default {defaultSelected.person.fullName()}</Button>
+
 <!-- A pure tailwindcss table -->
 <table class="text-center text-black w-full">
     <thead>
         <tr>
             <th class="bg-sky-300 w-full">
                 <Badge rounded color="dark">{filteredItems.length}</Badge>
-                {selected.label}
+                Current is: {selected.label}
             </th>
         </tr>
         <tr>
