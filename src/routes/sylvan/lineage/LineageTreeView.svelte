@@ -1,7 +1,7 @@
 <script>
     import { Badge } from 'flowbite-svelte'
     import { LineageTreeData } from './LineageTreeData.js'
-    import TreeView from './TreeView.svelte'
+    import TreeView from '$lib/svelte//TreeView.svelte'
 
     export let person
     const subject = person// preserve original person
