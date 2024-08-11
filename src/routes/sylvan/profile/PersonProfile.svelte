@@ -56,17 +56,25 @@
     <Accordion>
         <AccordionItem>
             <span slot="header">Childhood Family</span>
+            {#if person.father()}
             <p><button class="text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
                     on:click={()=>person=person.father()}>View</button>
                 Father: {person.father().fullName()}
                 <PersonPopover trigger="father" person={person.father()} />
             </p>
+            {:else}
+            <p>Father: Unknown</p>
+            {/if}
 
+            {#if person.mother()}
             <p><button class="text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
                     on:click={()=>person=person.mother()}>View</button>
                 Mother: {person.mother().fullName()}
                 <PersonPopover trigger="mother" person={person.mother()} />
             </p>
+            {:else}
+            <p>Mother: Unknown</p>
+            {/if}
 
             <p>{siblings.length} Siblings:</p>
             {#each siblings as sibling, i}

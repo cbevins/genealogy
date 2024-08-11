@@ -1,13 +1,12 @@
-<script>
+<script lang="ts">
     import { sineIn } from 'svelte/easing';
-    import { Drawer, Button, CloseButton, Popover } from 'flowbite-svelte'
-    import { UserSettingsSolid, UsersGroupSolid, UsersSolid } from 'flowbite-svelte-icons'
-    import { getPersonSelectors } from '$lib/sylvan/Singletons.js'
-    import PersonProfile from './PersonProfile.svelte'
+    import { Drawer, Button, CloseButton } from 'flowbite-svelte'
+    import { UserSettingsSolid, UsersGroupSolid } from 'flowbite-svelte-icons'
+    import { Lineage, Demographics, GenerationStats, getPersonSelectors, getSylvan } from '$lib/index.js'
 
     import Card from '$lib/svelte/Card.svelte'
     import H5c from '$lib/svelte/H5c.svelte'
-    import Selector from './Selector.svelte'
+    import Selector from '../profile/Selector.svelte'
 
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
     import { subjectPerson } from '$lib/sylvan/store.js'
@@ -32,6 +31,11 @@
         duration: 200,
         easing: sineIn
     }
+
+    const lineage = new Lineage($subjectPerson)
+    const demog = new Demographics(lineage.persons())
+    const gen = new GenerationStats(getSylvan(), $subjectPerson)
+
 </script>
 
 <div class="absolute top-40 left-0">
@@ -65,4 +69,3 @@
         <Selector items={items}  bind:selected={selected}/>
     </Drawer>
 </Card>
-<PersonProfile person={$subjectPerson}/>
