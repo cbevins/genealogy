@@ -1,26 +1,15 @@
 <script lang="ts">
     import { Tabs, TabItem } from 'flowbite-svelte'
-
     import { Lineage } from '$lib/index.js'
     import LineageDemographics from './LineageDemographics.svelte'
     import LineageOrigins from './LineageOrigins.svelte'
-    import { LineageTreeData } from './LineageTreeData.js'
     import LineageTreeView from './LineageTreeView.svelte'
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
     import { subjectPerson } from '$lib/sylvan/store.js'
 
     const subject = $subjectPerson // preserve original person
     $: person = $subjectPerson
-
-    let lineage = null
-    let lineageTreeData = null
-    let tree_data = []
-    $: {
-        lineage = new Lineage(person)
-        lineageTreeData = new LineageTreeData(person)
-        tree_data = lineageTreeData.treeData()
-        // const stats = new GenerationStats(getSylvan(), person)
-    }
+    $: lineage = new Lineage(person)
 
 </script>
 
@@ -33,12 +22,12 @@
 </div>
 
 <div class="relative text-center mb-2 text-md font-bold tracking-tight text-gray-900 dark:text-white">
-    {lineageTreeData.count} Known Direct Ancestors
+    has {lineage.size()} Known Direct Ancestors
 </div>
 
 <Tabs>
     <TabItem open title="Lineage Tree">
-        <LineageTreeView person={person} tree_data={tree_data}/>
+        <LineageTreeView person={person}/>
     </TabItem>
 
     <TabItem title="National Origins">

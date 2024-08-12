@@ -1,9 +1,16 @@
 <script>
     import { Badge } from 'flowbite-svelte'
     import TreeView from '$lib/svelte//TreeView.svelte'
+    import { LineageTreeData } from './LineageTreeData.js'
 
-    export let person = null
-    export let tree_data = []
+    export let person
+
+    let lineageTreeData = null
+    let tree_data = []
+    $: {
+        lineageTreeData = new LineageTreeData(person)
+        tree_data = lineageTreeData.treeData()
+    }
 </script>
 
 <div class="border-2 border-black mt-4 mb-4 pt-2 pb-2 rounded overflow-hidden shadow-lg shadow-slate-500 bg-blue-100">
