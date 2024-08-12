@@ -53,7 +53,7 @@ function demographics(sylvan, subjectKey) {
     const lineage = new Lineage(subject)
     const demog = new Demographics(lineage.persons())
     const msg = [`Demographics for '${subject.label()}' ${lineage.size()} direct ancestors:`]
-    return msg.concat(demog.ageDemographics(), demog.chilrenDemographics(), demog.spouseDemographics())
+    return msg.concat(demog.ageDemographics(), demog.childrenDemographics(), demog.spouseDemographics())
 }
 
 function generations(sylvan, subjectKey) {

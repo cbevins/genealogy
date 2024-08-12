@@ -86,7 +86,7 @@ export class Demographics {
     // Demonstrates how to display the Demographic table
     // 0=age, 1=spouses, 2=children
     ageDemographics() { return this.demoArray(0) }
-    chilrenDemographics() { return this.demoArray(1) }
+    childrenDemographics() { return this.demoArray(1) }
     spouseDemographics() { return this.demoArray(2) }
     demoArray(propIdx=0) {
         const msg = ['']
