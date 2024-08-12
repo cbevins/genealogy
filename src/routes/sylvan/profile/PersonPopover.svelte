@@ -1,7 +1,7 @@
 <script>
     import { Popover } from 'flowbite-svelte'
     import { InfoCircleSolid } from 'flowbite-svelte-icons'
-    import { blur, fade, slide } from 'svelte/transition';
+    import { blur, fade, slide } from 'svelte/transition'
     
     export let trigger = ''
     export let person

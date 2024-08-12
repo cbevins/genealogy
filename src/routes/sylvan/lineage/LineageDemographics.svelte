@@ -1,6 +1,6 @@
 <script>
     import { Demographics } from '$lib/index.js'
-    import { ButtonGroup, Button, GradientButton } from 'flowbite-svelte'
+    import { ButtonGroup, Button } from 'flowbite-svelte'
 
     export let lineage  // Lineage instance
 
@@ -8,10 +8,6 @@
 
     $: dem = new Demographics(lineage.persons())
     $: propIdx = 0
-
-    function age() {propIdx = 0}
-    function spouses() {propIdx = 1}
-    function children() {propIdx = 2}
 
     function stat(row, col, propId, field) {
         let idx = row * dem.cols().length + col
@@ -23,9 +19,9 @@
 <div class="container p-2 mx-auto rounded-md sm:p-4 dark:text-gray-800 dark:bg-gray-50">
 	<div class="mb-3 text-center">
     <ButtonGroup class="space-x-px mb-2">
-        <Button pill color="yellow" on:click={age}>Age at Death</Button>
-        <Button pill color="yellow" on:click={children}>Number of Children</Button>
-        <Button pill color="yellow" on:click={spouses}>Number of Spouses</Button>
+        <Button pill color="yellow" on:click={()=>propIdx=0}>Age at Death</Button>
+        <Button pill color="yellow" on:click={()=>propIdx=2}>Number of Children</Button>
+        <Button pill color="yellow" on:click={()=>propIdx=1}>Number of Spouses</Button>
     </ButtonGroup>
     </div>
 	<h2 class="mb-3 text-center text-2xl font-semibold leading-tight">{Prop[propIdx]}</h2>
