@@ -80,8 +80,8 @@ export class GenerationStats {
             if (gen.count) {
                 str = `${i.toString().padStart(3)} | ${GenerationsData[i].count.toString().padStart(5)} |`
                 str += `${gen.count.toString().padStart(6)} |`
-                str += ` ${gen.birthMin} - ${gen.birthMax} | ${gen.deathMin} - ${gen.deathMax.toString().padStart(4)} |`
                 for (const [country, count] of gen.country.entries()) {
+                    str += ` ${gen.birthMin} - ${gen.birthMax} | ${gen.deathMin} - ${gen.deathMax.toString().padStart(4)} |`
                     str += count.toString().padStart(4) + ' |'
                 }
                 lines.push(str)

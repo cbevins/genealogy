@@ -2,6 +2,7 @@
     import { Tabs, TabItem } from 'flowbite-svelte'
     import { Lineage } from '$lib/index.js'
     import LineageDemographics from './LineageDemographics.svelte'
+    import LineageGenerations from './LineageGenerations.svelte'
     import LineageOrigins from './LineageOrigins.svelte'
     import LineageTreeView from './LineageTreeView.svelte'
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
@@ -36,5 +37,9 @@
 
     <TabItem title="Demographics">
         <LineageDemographics lineage={lineage}/>
+    </TabItem>
+
+    <TabItem title="Generations">
+        <LineageGenerations person={person}/>
     </TabItem>
 </Tabs>
