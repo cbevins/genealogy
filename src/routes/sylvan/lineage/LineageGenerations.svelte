@@ -14,7 +14,9 @@
 </script>
 
 <div class="container p-2 mx-auto rounded-md sm:p-4 dark:text-gray-800 dark:bg-gray-50">
-	<h2 class="mb-3 text-center text-2xl font-semibold leading-tight">National Origins</h2>
+	<h2 class="mb-3 text-center text-2xl font-semibold leading-tight">
+        Generational Info
+    </h2>
 	<div class="overflow-x-auto">
         <table class="min-w-full rounded-lg border-collapse bg-amber-500">
 			<thead class=" dark:bg-red-700">

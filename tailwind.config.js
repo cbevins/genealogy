@@ -3,7 +3,7 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 import flowbitePlugin from 'flowbite/plugin'
 
 const config = {
-	darkMode: ["class"],
+	darkMode: ["selector"],
 	content: ['./src/**/*.{html,js,svelte,ts}', './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'],
 	safelist: ["dark"],
 	theme: {
