@@ -15,7 +15,7 @@
 <div class="mx-auto border-8 border-indigo-800 ml-4 mr-4 px-2 py-2 rounded-lg">
 
     <div class="mx-auto border-4 mb-2 border-red-500 rounded-lg">
-<FlowbiteNavbar/>
+		<FlowbiteNavbar/>
 		<!-- Button that shows.hides the PersonSelectorDrawer -->
 		<div class="flex p-1">
 			<Button on:click={() => (hidden = false)} class="p-2" size="sm">

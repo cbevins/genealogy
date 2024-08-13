@@ -44,9 +44,16 @@
             <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
         </NavLi>
         <Dropdown class="w-full z-20">
-            <DropdownItem href="/tailwind/accordians/SaadHasan">Accordians by Saad Hasan</DropdownItem>
-            <DropdownItem href="/tailwind/accordians/Zoltan">Accordians by Zoltan</DropdownItem>
-            <DropdownDivider />
+            <NavUl {activeUrl}>
+                <NavLi class="cursor-pointer">
+                    Accordions
+                    <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
+                </NavLi>
+                <Dropdown class="w-full z-20" placement="right-start">
+                    <DropdownItem href="/tailwind/accordians/SaadHasan">Accordians by Saad Hasan</DropdownItem>
+                    <DropdownItem href="/tailwind/accordians/Zoltan">Accordians by Zoltan</DropdownItem>
+                </Dropdown>
+            </NavUl>
             <DropdownItem href="/tailwind/alerts">Alert Examples</DropdownItem>
             <DropdownItem href="/tailwind/buttons">Button Examples</DropdownItem>
             <DropdownItem href="/tailwind/cards">Card Example</DropdownItem>
