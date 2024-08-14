@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Tabs, TabItem } from 'flowbite-svelte'
     import { Lineage } from '$lib/index.js'
+    import LineageChecklist from './LineageChecklist.svelte'
     import LineageDemographics from './LineageDemographics.svelte'
     import LineageGenerations from './LineageGenerations.svelte'
     import LineageOrigins from './LineageOrigins.svelte'
@@ -41,5 +42,9 @@
 
     <TabItem title="Generations">
         <LineageGenerations person={person}/>
+    </TabItem>
+
+    <TabItem title="Checklist">
+        <LineageChecklist lineage={lineage}/>
     </TabItem>
 </Tabs>
