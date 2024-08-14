@@ -46,7 +46,7 @@
             <FlowbiteComponentsDropdown {activeUrl}/>
         </Dropdown>
 
-		<!-- Button that shows.hides the PersonSelectorDrawer -->
+		<!-- Button that shows/hides the PersonSelectorDrawer -->
 		<div class="flex p-1">
             <Button on:click={() => (hidden = false)} class="p-2" size="sm">
                 {$subjectPerson.fullName()}

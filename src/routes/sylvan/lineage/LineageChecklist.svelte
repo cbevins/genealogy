@@ -1,6 +1,4 @@
 <script>
-	import { FileVideoOutline } from "flowbite-svelte-icons";
-
     export let lineage  // Lineage instance
 
     $: nodes = lineage.nodesBySeq()
@@ -36,12 +34,12 @@
                     <th class="p-2 text-left font-semibold"></th>
                     <th class="p-2 text-left font-semibold">Name</th>
                     <th class="p-2 text-left font-semibold">File #</th>
-                    <th class="p-2 text-left font-semibold">B Year</th>
-                    <th class="p-2 text-left font-semibold">B State</th>
-                    <th class="p-2 text-left font-semibold">B Country</th>
-                    <th class="p-2 text-left font-semibold">D Year</th>
-                    <th class="p-2 text-left font-semibold">D State</th>
-                    <th class="p-2 text-left font-semibold">D Country</th>
+                    <th class="p-2 text-left font-semibold">Birth<br>Year</th>
+                    <th class="p-2 text-left font-semibold">Birth<br>State</th>
+                    <th class="p-2 text-left font-semibold">Birth<br>Country</th>
+                    <th class="p-2 text-left font-semibold">Death<br>Year</th>
+                    <th class="p-2 text-left font-semibold">Death<br>State</th>
+                    <th class="p-2 text-left font-semibold">Death<br>Country</th>
                 </tr>
             </thead>
             <tbody>

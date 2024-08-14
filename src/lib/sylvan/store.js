@@ -3,6 +3,8 @@
  */
 import { writable } from 'svelte/store'
 
+export const ancestorPerson = writable(null)
+
 export const subjectPerson = writable(null)
 
 export const sylvanStore = writable(null)

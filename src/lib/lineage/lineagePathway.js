@@ -13,6 +13,13 @@ export function lineagePathway(subject, target) {
     return path
 }
 
+// Returns array in subject-to-ancestor order
+export function lineagePathwaySubjectToAncestor(subject, ancestor) {
+    let pairs = lineagePathway(subject, ancestor)
+    pairs.push([subject, null])
+    return pairs.reverse()
+}
+
 function lineage(subject, target, path=[]) {
     if (subject === target) {
         return path

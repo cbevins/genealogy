@@ -72,7 +72,21 @@ export class Lineage {
 
     // Returns a reference to the Person => {node} Map()
     personsMap() { return this.data().persons }
-    
+
+    // Returns an array of objects used to <select> people from the lineage.
+    // The array is like [{index: <number>, person: <Person>, label: <string>}]
+    personSelectors() {
+        const nodes = this.nodesBySeq()
+        const items = []
+        for(let i=0; i<nodes.length; i++) {
+            items.push({index: i, person: nodes[i].person, label: nodes[i].person.label()})
+        }
+        // Sort alphabetically and update the index for the new sort order
+        items.sort(function(a, b) {return a.label.localeCompare(b.label)})
+        for(let i=0; i<items.length; i++) items[i].index = i
+        return items
+    }
+
     // Returns a reference to the client-accessible property object or its fields
     prop(field=null) { return field ? this.data().prop[field] : this.data().prop }
 

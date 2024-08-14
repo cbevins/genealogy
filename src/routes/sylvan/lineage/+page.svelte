@@ -5,13 +5,17 @@
     import LineageDemographics from './LineageDemographics.svelte'
     import LineageGenerations from './LineageGenerations.svelte'
     import LineageOrigins from './LineageOrigins.svelte'
+    import LineagePathway from './LineagePathway.svelte'
     import LineageTreeView from './LineageTreeView.svelte'
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
     import { subjectPerson } from '$lib/sylvan/store.js'
+    import { ancestorPerson } from '$lib/sylvan/store'
 
     const subject = $subjectPerson // preserve original person
     $: person = $subjectPerson
-    $: lineage = new Lineage(person)
+    $: lineage = new Lineage($subjectPerson)
+    $: items = lineage.personSelectors()
+    $: ancestorPerson.update(() => items[0].person)
 
 </script>
 
@@ -20,7 +24,7 @@
     <!-- parent <div> must be 'relative', and child <div> must be absolute -->
     <button class="absolute left-2 top-0 text-xs border-2 rounded px-1 text-slate-300 bg-green-700"
         on:click={()=>person=subject}>View Subject</button>
-        {person.fullName()}
+        {$subjectPerson.fullName()}
 </div>
 
 <div class="relative text-center mb-2 text-md font-bold tracking-tight text-gray-900 dark:text-white">
@@ -38,6 +42,10 @@
 
     <TabItem title="Demographics">
         <LineageDemographics lineage={lineage}/>
+    </TabItem>
+
+    <TabItem title="Pathway">
+        <LineagePathway items={items} subject={$subjectPerson}/>
     </TabItem>
 
     <TabItem title="Generations">
