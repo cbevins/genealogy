@@ -24,7 +24,34 @@ export function gxmlStr(gxml, indent=2, eol='\n', level=0) {
     }
     return xml
 }
-    
+
+// Returns a new Gxml 'els' array wrapped in a <g> that
+// scales and rotates the group and translates their center
+// to the x, y coordinates.
+// The width and height of els[0] defines the center offsets
+export function center(els, x=0, y=0, s=1, r=0) {
+    const xc = x - s * 0.5 * els[0].width
+    const yc = y - s * 0.5 * els[0].height
+    return {el: 'g',
+        transform: `rotate(${r}, ${x}, ${y}) translate(${xc}, ${yc}) scale(${s})`,
+        els: els}
+}
+
+// Returns a new Gxml 'els' array wrapped in a <g> that
+// scales and rotates the group and translates their
+// top-left corner to the x, y coordinates
+export function place(els, x=0, y=0, s=1, r=0) {
+    return {el: 'g',
+        transform: `rotate(${r}, ${x}, ${y}) translate(${x}, ${y}) scale(${s})`,
+        els: els}
+}
+
+// Convenience function to create a 'text' el with 'inner' content.
+export function textEl(x, y, content, anchor="left") {
+    return {el: 'text', x: x, y: y, 'text-anchor': anchor,
+        els: [{el: 'inner', content: content}]}
+}
+
 export function _gxmlStr(gxml, indent, eol, level=0) {
     // Check for nested arrays of gxml
     if (Array.isArray(gxml)) return gxmlStr(gxml, indent, eol, level)

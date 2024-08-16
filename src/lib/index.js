@@ -4,6 +4,14 @@ export { file2JsonArray } from './file-reader/file2JsonArray.js'
 export { constructGedcom } from './gedcom/constructGedcom.js'
 export { Gedcom } from './gedcom/Gedcom.js'
 
+export { Countries, countryAbbr, countryFlag, countryFlagHref, countryLabel } from './flags/Countries.js'
+export { flagDefsGxml } from './flags/flagDefsGxml.js'
+export { flagGxml } from './flags/flagGxml.js'
+export { flagLegendGxml, flagTableGxml } from './flags/flagLegendGxml.js'
+
+export { nestedExampleGxml } from './gxml/nestedExampleGxml.js'
+export { gxmlStr, center, place, textEl } from './gxml/gxmlStr.js'
+
 export { intFmt } from './helpers/formatters.js'
 
 export { Sylvan } from './sylvan/Sylvan.js'

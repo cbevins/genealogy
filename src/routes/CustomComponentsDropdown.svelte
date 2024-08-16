@@ -6,7 +6,8 @@
     const items = [
         {href: "/custom/combobox-1", label: 'Comboboxes'},
         {href: "/custom/fileupdown", label: 'Client File Upload - Edit - Download'},
-        {href: "/custom/svgbutton", label: 'SVG Button with Event Handlers'},
+        {href: "/custom/svgcontroller", label: 'SVG Controller'},
+        {href: "/custom/svgevents", label: 'SVG Button with Event Handlers'},
         {href: "/custom/treeview", label: 'Treeview'},
     ]
 </script>
