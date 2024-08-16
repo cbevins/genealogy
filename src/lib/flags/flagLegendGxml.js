@@ -5,21 +5,23 @@ export function flagLegendGxml(x, y, diam, scale=1) {
     const els = []
     let row = 0
     for(const [, country] of Countries.entries()) {
-        const href = '#' + country.flag
-        els.push({el: 'g',
-            transform: `translate(${x}, ${y}) scale(${s})`,
-            els: [
-                {el: 'use', x: 0, y: row*120,
-                    href: href,
-                    filter: "url(#flag-lighting)",
-                    'clip-path': "url(#flag-clipper)"
-                },
-                {el: 'text', x: 120, y: row*120+60, 'font-size': 48, els: [
-                    {el: 'inner', content: country.label}]
-                }
-            ]
-        })
-        row++
+        if (country.legend) {
+            const href = '#' + country.flag
+            els.push({el: 'g',
+                transform: `translate(${x}, ${y}) scale(${s})`,
+                els: [
+                    {el: 'use', x: 0, y: row*120,
+                        href: href,
+                        filter: "url(#flag-lighting)",
+                        'clip-path': "url(#flag-clipper)"
+                    },
+                    {el: 'text', x: 120, y: row*120+60, 'font-size': 48, els: [
+                        {el: 'inner', content: country.label}]
+                    }
+                ]
+            })
+            row++
+        }
     }
     return els
 }
