@@ -1,6 +1,4 @@
-export function flagDefsGxml() {
-    const w = 100
-    const h = 100
+export function flagDefsGxml(w=100, h=100) {
     const flag = {el: 'rect', x: 0, y: 0, width: w, height: h,
         fill: 'white', stroke: 'black', 'stroke-width': 0}
     const rect = {el: 'rect', x: 0, y: 0, width: w, height: h, fill: "none", stroke: 'none'}

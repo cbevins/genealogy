@@ -4,6 +4,7 @@
     import { ChevronDownOutline } from 'flowbite-svelte-icons'
 	import PersonSelectorDrawer from '$lib/svelte/PersonSelectorDrawer.svelte'
     import CustomComponentsDropdown from './CustomComponentsDropdown.svelte'
+    import SvgComponentsDropdown from './SvgComponentsDropdown.svelte'
     import TailwindComponentsDropdown from './TailwindComponentsDropdown.svelte'
     import FlowbiteComponentsDropdown from './FlowbiteComponentsDropdown.svelte'
     import Collin from "$lib/images/Collin.jpg"
@@ -42,6 +43,7 @@
         <Dropdown class="w-full z-20">
             <DropdownItem href="/">Reference Sites</DropdownItem>
             <CustomComponentsDropdown {activeUrl}/>
+            <SvgComponentsDropdown {activeUrl}/>
             <TailwindComponentsDropdown {activeUrl}/>
             <FlowbiteComponentsDropdown {activeUrl}/>
         </Dropdown>

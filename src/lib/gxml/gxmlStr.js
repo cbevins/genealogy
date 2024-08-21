@@ -20,30 +20,29 @@ export function gxmlStr(gxml, indent=2, eol='\n', level=0) {
     let xml = ''
     const ar = Array.isArray(gxml) ? gxml : [gxml]
     for(let i=0; i<ar.length; i++) {
-        xml += _gxmlStr(ar[i], indent, eol)
+        xml += _gxmlStr(ar[i], indent, eol, level)
     }
     return xml
 }
 
-// Returns a new Gxml 'els' array wrapped in a <g> that
-// scales and rotates the group and translates their center
-// to the x, y coordinates.
-// The width and height of els[0] defines the center offsets
-export function center(els, x=0, y=0, s=1, r=0) {
-    const xc = x - s * 0.5 * els[0].width
-    const yc = y - s * 0.5 * els[0].height
+// Returns a new Gxml <g> element that scales and rotates the 'el'
+// and translates its center pt to its parent container's x,y.
+// Returns reference to the new <g> element.
+export function center(el, x=0, y=0, s=1, r=0) {
+    const xc = x - s * 0.5 * el.width
+    const yc = y - s * 0.5 * el.height
     return {el: 'g',
         transform: `rotate(${r}, ${x}, ${y}) translate(${xc}, ${yc}) scale(${s})`,
-        els: els}
+        els: [el]}
 }
 
-// Returns a new Gxml 'els' array wrapped in a <g> that
-// scales and rotates the group and translates their
-// top-left corner to the x, y coordinates
-export function place(els, x=0, y=0, s=1, r=0) {
+// Returns a new Gxml <g> element that scales and rotates the 'el'
+// and translates its top-left corner to its parent container's x, y coordinates
+// Returns reference to the new <g> element.
+export function place(el, x=0, y=0, s=1, r=0) {
     return {el: 'g',
         transform: `rotate(${r}, ${x}, ${y}) translate(${x}, ${y}) scale(${s})`,
-        els: els}
+        els: [el]}
 }
 
 // Convenience function to create a 'text' el with 'inner' content.

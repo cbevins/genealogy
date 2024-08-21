@@ -8,7 +8,7 @@
     <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
     Tailwind Examples
 </NavLi>
-<Dropdown class="w-full z-20" placement="left-start">
+<Dropdown class="w-full z-20" placement="right-start">
     <NavUl {activeUrl}>
         <NavLi class="cursor-pointer">
             Accordions

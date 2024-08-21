@@ -4,15 +4,18 @@
     export let activeUrl
 
     const items = [
-        {href: "/custom/combobox-1", label: 'Comboboxes'},
-        {href: "/custom/fileupdown", label: 'Client File Upload - Edit - Download'},
-        {href: "/custom/treeview", label: 'Treeview'},
+        {href: "/svg/svg-element", label: 'SVG Element'},
+        {href: "/svg/svg-controller", label: 'SVG Flags (controller)'},
+        {href: "/svg/svg-events", label: 'SVG Button with Event Handlers'},
+        {href: "/svg/svg-flags", label: 'SVG Flas (flags)'},
+        {href: "/svg/svg-scene", label: 'SVG Scene Builder'},
+        {href: "/svg/svg-transforms", label: 'SVG Transforms'},
     ]
 </script>
 
 <NavLi class="cursor-pointer">
     <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
-    Custom Sandbox
+    SVG Components
 </NavLi>
 <Dropdown class="w-full z-20 border-0" placement="right-start">
     {#each items as item}
