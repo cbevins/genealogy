@@ -1,26 +1,40 @@
-# Gxml
+# Gxml - Generic XML
 
-Gxml stands for Generic XML, and consists of a single concept and a single function.
+Gxml is a tiny set of functions for programatically creating generic, nested
+XML-like structures that are subsequently converted into HTML, SVG, or other XML code and displayed in a browser or written to a file.
 
-The concept is to use Javascript and JSON to define a XML-compliant, nested data structure that is then turned into a XML/HTML/SVG command text string.
+Gxml was specifically designed to make the creation of detailed, complex SVG structures simpler and more manageable.  The driving use-case for Gxml is the construction of SVG elements that may be both:
 
-The driving use-case for Gxml is the construction of SVG HTML elements that may be both
-
-- displayed within an HTM document (using Svelte's @HTML directive), and
+- displayed within an HTML document (using Svelte's @HTML directive), and
 - downloaded to the local file system as an SVG image file.
 
-Gxml leverages the functional and procedural capabilities of Javascript to produce declarative XML, thereby avoiding the clumsy code hacks required by, for example, Svelte components.
+However, it is just as adept at creating any HTML or other XML-compliant instruction or data set.
 
-Gxml uses JSON to define an array of Gxml elements.  A Gxml 'element' is simply a JSON object with:
-- a required 'el:' property that names the element tag, like 'svg', 'defs', 'g', 'rect', 'circle', etc.
-- any property attributes appropriate to the tag, and
-- an optional 'els': property that is itself an array containing child Gxml objects
+##  Basics
 
-For example, to create an SVG <text> element:
+Gxml is based entirely upon a very simple Javascript data object, the 'el' (for 'element'):
+
 ```js
-const text = {el: 'text', id: 'text-1' x: 100, y: 200, 'stroke-width': 1, 'font-size': 24,
-    els: [{el: 'inner', content: 'Hello, World!'}]}
+const el = {el: <string>, els[]}
 ```
+
+The <code>el</code> is any valid SVG/HTML/XML element name, like <code>svg</code>, <code>rect</code>, <code>circle</code>, <code>line</code>, <code>path</code>, <code>text</code>, <code>defs</code>, <code>g</code>, etc.  Similary, it could also be an HTML element such as <code>div</code>, <code>p</code>, <code>h1</code>, <code>button</code>, and so forth.
+
+The <code>els</code> is an array of its child <code>el<code>.
+
+You may supply any other attributes as appropriate to the <code>el</code>.  For  example:
+
+```js
+const flag = {el: 'rect', width: 200, height: 100, fill: 'blue', stroke: 'black', els: [
+    {el: 'rect', width: 200, height: 50, x: 0, y: 50, fill: 'green', els: []},
+    {el: 'circle', cx: 50, cy: 50, r: 50, fill: 'yellow', els: []},
+    {el: 'text', x: 100, y: 75, 'text-anchor': 'middle', 'font-size': 24, els: [
+        {el: 'inner', content: 'Live Free or Die'}]
+    }
+]}
+```
+
+creates a simple flag from a &lt;rect&gt; that contains a nested &lt;rect&gt;, &lt;circle&gt;, and some &lt;text&gt;.
 
 The Gxml elements can be composed in any order, traversed to locate child object by their 'id' (or any other) attribute, and created using logical and looping structures.
 

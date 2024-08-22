@@ -10,7 +10,7 @@ export { flagGxml } from './flags/flagGxml.js'
 export { flagLegendGxml, flagTableGxml } from './flags/flagLegendGxml.js'
 
 export { nestedExampleGxml } from './gxml/nestedExampleGxml.js'
-export { gxmlStr, center, place, textEl } from './gxml/gxmlStr.js'
+export { gxmlStr } from './gxml/gxmlStr.js'
 
 export { intFmt } from './helpers/formatters.js'
 

@@ -25,32 +25,6 @@ export function gxmlStr(gxml, indent=2, eol='\n', level=0) {
     return xml
 }
 
-// Returns a new Gxml <g> element that scales and rotates the 'el'
-// and translates its center pt to its parent container's x,y.
-// Returns reference to the new <g> element.
-export function center(el, x=0, y=0, s=1, r=0) {
-    const xc = x - s * 0.5 * el.width
-    const yc = y - s * 0.5 * el.height
-    return {el: 'g',
-        transform: `rotate(${r}, ${x}, ${y}) translate(${xc}, ${yc}) scale(${s})`,
-        els: [el]}
-}
-
-// Returns a new Gxml <g> element that scales and rotates the 'el'
-// and translates its top-left corner to its parent container's x, y coordinates
-// Returns reference to the new <g> element.
-export function place(el, x=0, y=0, s=1, r=0) {
-    return {el: 'g',
-        transform: `rotate(${r}, ${x}, ${y}) translate(${x}, ${y}) scale(${s})`,
-        els: [el]}
-}
-
-// Convenience function to create a 'text' el with 'inner' content.
-export function textEl(x, y, content, anchor="left") {
-    return {el: 'text', x: x, y: y, 'text-anchor': anchor,
-        els: [{el: 'inner', content: content}]}
-}
-
 export function _gxmlStr(gxml, indent, eol, level=0) {
     // Check for nested arrays of gxml
     if (Array.isArray(gxml)) return gxmlStr(gxml, indent, eol, level)
@@ -70,7 +44,7 @@ export function _gxmlStr(gxml, indent, eol, level=0) {
     // Compose opening tag
     let cmd = ''.padStart(level*indent) + `<${gxml.el}`
     for (const [key, value] of Object.entries(gxml)) {
-        if (key !== 'el' && key !== 'els') cmd += ` ${key}="${value}"`
+        if (key !== 'el' && key !== 'els' && key !== 'private') cmd += ` ${key}="${value}"`
     }
     // Compose content and closing tag
     if (str === '') return cmd + ' />' + eol

@@ -1,4 +1,4 @@
-import { gxmlStr, center, place, textEl } from '$lib/index.js'
+import { center, place, textEl } from './svg.js'
 
 export function canada(w=100, h=100) {
     return [{el: 'svg', id: 'flag-canada', width: w, height: h, els: [

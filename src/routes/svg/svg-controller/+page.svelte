@@ -1,7 +1,8 @@
 <script>
     import H from '$lib/svelte/H.svelte'
     import { Button } from 'flowbite-svelte'
-    import { gxmlStr, center, place, textEl } from '$lib/index.js'
+    import {gxmlStr } from '$lib'
+    import { center, place, textEl } from './svg.js'
     import { canada, england, france, germany, star, usa } from './flags.js'
     import { flagLegendGxml, flagDefsGxml, flagGxml } from '$lib/index.js'
 

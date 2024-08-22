@@ -4,7 +4,6 @@
     export let activeUrl
 
     const items = [
-        {href: "/svg/svg-element", label: 'SVG Element'},
         {href: "/svg/svg-controller", label: 'SVG Flags (controller)'},
         {href: "/svg/svg-events", label: 'SVG Button with Event Handlers'},
         {href: "/svg/svg-flags", label: 'SVG Flas (flags)'},
