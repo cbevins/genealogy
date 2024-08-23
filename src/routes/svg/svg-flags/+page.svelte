@@ -14,7 +14,7 @@
 </script>
 
 <Card><H5c>Flags from SVG GXML Elements</H5c>
-    {@html gxmlStr(flagsTableGxml())}
+    {@html gxmlStr(flagsTableGxml(100, 50))}
 </Card>
 
 <Card><H5c>SVG Nested and Transformed Elements</H5c>

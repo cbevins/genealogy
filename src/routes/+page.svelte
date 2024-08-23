@@ -54,4 +54,17 @@
         Pilgrim Ship List (290 ships, 7100 families)</a>
     </li>
 </ul>
+
+
+<div class="text-lg text-left mt-4 pl-4">
+    <H>Useful SVG Sites</H>
+</div>
+
+<ul class="pl-6">
+    <li><a class="font-medium text-blue-600 visited:text-purple-600 underline dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:no-underline"
+        href="https://css-tricks.com/transforms-on-svg-elements/" target="_blank">
+        Transforms on SVG Elements</a>
+    </li>
+</ul>
+
 </Card>
