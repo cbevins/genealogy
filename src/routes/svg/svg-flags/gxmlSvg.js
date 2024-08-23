@@ -4,6 +4,32 @@
  */
 
 /**
+ * Fits the sourceEl into the destEl scaling either the sourceEL's
+ * 'width', 'height', or 'both'.
+ * @param {*} sourceEl 
+ * @param {*} destEl 
+ * @param {*} fit 'width', 'height', or 'both'
+ * @returns 
+ */
+export function fit(sourceEl, destEl, fit='both') {
+    let xscale = destEl.width / sourceEl.width
+    let yscale = destEl.height / sourceEl.height
+    if (fit === 'width' || fit === 'x') {
+        yscale = xscale
+    } else if (fit === 'height' || fit === 'y') {
+        xscale = yscale
+    } else if ( fit === 'none') {
+        xscale = 1
+        yscale = 1
+    }
+    const transform = `scale(${xscale}, ${yscale})`
+    console.log(transform)
+    const g = {el: 'g', transform: transform, els: [sourceEl]}
+    destEl.els.push(g)
+    return g
+}
+
+/**
  * A nested placement operation that places a wrapped 'sourceEl' inside a 'destEl'.
  * 
  * The scourceEl is first wrapped inside a <g> element,
@@ -107,7 +133,6 @@ export function registerCenters(subjectEl, referEl, scale=1, degrees=0) {
     const rbox = bbox(referEl)
     const referX = rbox.width/2
     const referY = rbox.height/2
-    console.log(subjectX, subjectY, referX, referY)
     return register(subjectEl, subjectX, subjectY, referEl, referX, referY, scale, degrees)
 }
 
@@ -139,7 +164,6 @@ function bbox(el) {
         // const width = 16 * el.els[0].content.length
         const height = -0.75 * fs
         const box = {x, y, width, height}
-        console.log('el', el.el, 'font-size', fs,  'bbox', box)
         return box
     }
     const x = Object.hasOwn(el, 'x') ? el.x : 0
@@ -147,6 +171,5 @@ function bbox(el) {
     const width = Object.hasOwn(el, 'width') ? el.width : 0
     const height = Object.hasOwn(el, 'height') ? el.height : 0
     const box = {x, y, width, height}
-    console.log('el', el.el, 'bbox', box)
     return box
 }
