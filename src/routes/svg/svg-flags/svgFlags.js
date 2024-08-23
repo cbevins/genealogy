@@ -1,4 +1,4 @@
-import { nestTl } from './gxmlSvg.js'
+import { nestTl } from '$lib'
 
 export function border(w, h) {
     return {el: 'path', fill: 'none', stroke: 'black', 'stroke-width': 1,

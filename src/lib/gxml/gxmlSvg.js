@@ -23,7 +23,6 @@ export function fit(sourceEl, destEl, fit='both') {
         yscale = 1
     }
     const transform = `scale(${xscale}, ${yscale})`
-    console.log(transform)
     const g = {el: 'g', transform: transform, els: [sourceEl]}
     destEl.els.push(g)
     return g

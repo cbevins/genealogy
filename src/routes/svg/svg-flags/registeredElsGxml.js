@@ -1,4 +1,4 @@
-import { register, registerCenters, textEl } from './gxmlSvg.js'
+import { register, registerCenters, textEl } from '$lib'
 
 export function registeredElementsGxml() {
     const parent = {el: 'svg', x: 0, y: 0, width: 700, height: 500, style: 'background: grey', els:[]}

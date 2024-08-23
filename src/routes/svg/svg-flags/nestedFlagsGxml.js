@@ -1,5 +1,5 @@
 // Flag nested transforms
-import {nest, nestMid, nestTl, register, registerCenters, textEl } from './gxmlSvg.js'
+import {nest, nestMid, nestTl } from '$lib'
 import { belgium, canada, england, france, germany, ireland, netherlands,
     norway, scotland, sweden, unknown, wales, usa } from './svgFlags.js'
 import { flagDefsGxml } from '$lib'

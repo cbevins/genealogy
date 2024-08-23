@@ -1,4 +1,4 @@
-import { fit, nest, textEl } from "./gxmlSvg"
+import { fit, nest, textEl } from '$lib'
 
 export function posterGxml() {
     const svg = {el: 'svg', width: 850, height: 1100, style: "background: grey", els: []}

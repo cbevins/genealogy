@@ -11,6 +11,7 @@ export { flagLegendGxml, flagTableGxml } from './flags/flagLegendGxml.js'
 
 export { nestedExampleGxml } from './gxml/nestedExampleGxml.js'
 export { gxmlStr } from './gxml/gxmlStr.js'
+export { fit, nest, nestMid, nestTl, register, registerCenters, textEl } from './gxml/gxmlSvg.js'
 
 export { intFmt } from './helpers/formatters.js'
 
