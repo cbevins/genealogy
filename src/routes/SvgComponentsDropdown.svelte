@@ -4,11 +4,12 @@
     export let activeUrl
 
     const items = [
-        {href: "/svg/svg-controller", label: 'SVG Flags (controller)'},
         {href: "/svg/svg-events", label: 'SVG Button with Event Handlers'},
-        {href: "/svg/svg-flags", label: 'SVG Flags (flags)'},
-        {href: "/svg/svg-scene", label: 'SVG Scene Builder'},
+        {href: "/svg/svg-fit", label: 'SVG Poster Fit'},
+        {href: "/svg/svg-flags", label: 'SVG Flags Updated'},
         {href: "/svg/svg-transforms", label: 'SVG Transforms'},
+        {href: "/svg/svg-scene", label: 'SVG Scene Builder (DEPRECATED)'},
+        {href: "/svg/svg-controller", label: 'SVG Flags (DEPRECATED)'},
     ]
 </script>
 

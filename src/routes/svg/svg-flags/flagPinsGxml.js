@@ -49,15 +49,15 @@ export function flagPinDefsGxml(w=100, h=100) {
  * Requires that the flagPinDefsGxml.js els are loaded
  * into the top-level <svg>
  * 
- * @param {} id id (href) of the predefined flag in the <defs> block
- * @param {*} x upper left corner x-coordinate
- * @param {*} y upper left corner y-coordinate
- * @param {*} scale scale
- * @param {*} width Not used
- * @param {*} height Not used
+ * @param {string} id id (href) of the predefined flag in the <defs> block
+ * @param {number} x upper left corner x-coordinate
+ * @param {number} y upper left corner y-coordinate
+ * @param {number} scale scale
+ * @param {number} width Not used
+ * @param {number} height Not used
  * @returns A single Gxml JSON object with nested Gxml.
  */
-export function flagPinGxml(id, x, y, scale=1, width=100, height=100) {
+export function flagPinGxml(id, x=0, y=0, scale=1, width=100, height=100) {
     return {el: 'svg', x: x, y: y, width: scale*width, height: scale*height, els: [
     {el: 'g', transform: `scale(${scale}, ${scale})`, els: [
         {el: 'use', x: 0, y: 0,
@@ -71,33 +71,39 @@ export function flagPinGxml(id, x, y, scale=1, width=100, height=100) {
 export function flagPinsGxml(w=200, h=400) {
     const table = {el: 'svg', width: w, height: h, style: 'background: grey',
         els:[flagPinDefsGxml()]}
+    // @ts-ignore
     table.els.push(flagPinGxml('#flag-usa', 0, 0))
     return table
 }
 
 // TO DO! - this is from the old implementation
-export function flagPinsLegendGxml(x, y, diam, scale=1) {
-    const s = scale * diam/100
-    const els = []
-    let row = 0
-    for(const [, country] of Countries.entries()) {
-        if (country.legend) {
-            const href = '#' + country.flag
-            els.push({el: 'g',
-                transform: `translate(${x}, ${y}) scale(${s})`,
-                els: [
-                    {el: 'use', x: 0, y: row*120,
-                        href: href,
-                        filter: "url(#flag-lighting)",
-                        'clip-path': "url(#flag-clipper)"
-                    },
-                    {el: 'text', x: 120, y: row*120+60, 'font-size': 48, els: [
-                        {el: 'inner', content: country.label}]
-                    }
-                ]
-            })
-            row++
-        }
-    }
-    return els
-}
+/**
+ * @param {number} x
+ * @param {number} y
+ * @param {number} diam
+ */
+// export function flagPinsLegendGxml(x, y, diam, scale=1) {
+//     const s = scale * diam/100
+//     const els = []
+//     let row = 0
+//     for(const [, country] of Countries.entries()) {
+//         if (country.legend) {
+//             const href = '#' + country.flag
+//             els.push({el: 'g',
+//                 transform: `translate(${x}, ${y}) scale(${s})`,
+//                 els: [
+//                     {el: 'use', x: 0, y: row*120,
+//                         href: href,
+//                         filter: "url(#flag-lighting)",
+//                         'clip-path': "url(#flag-clipper)"
+//                     },
+//                     {el: 'text', x: 120, y: row*120+60, 'font-size': 48, els: [
+//                         {el: 'inner', content: country.label}]
+//                     }
+//                 ]
+//             })
+//             row++
+//         }
+//     }
+//     return els
+// }

@@ -1,5 +1,6 @@
 export function flagDefsGxml(w=100, h=100) {
-    // Templates used to cinstruct flag <svg> elements
+    // Version 1
+    // Templates used to construct flag <svg> elements
     const flag = {el: 'rect', x: 0, y: 0, width: w, height: h,
         fill: 'white', stroke: 'black', 'stroke-width': 0}
     const rect = {el: 'rect', x: 0, y: 0, width: w, height: h, fill: "none", stroke: 'none'}

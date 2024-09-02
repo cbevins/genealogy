@@ -5,7 +5,7 @@ import { flagPinDefsGxml, flagPinGxml } from './flagPinsGxml.js'
 
 const flags = ['belgium', 'canada', 'england', 'france', 'germany',
     'ireland', 'netherlands',
-    'norway', 'scotland', 'sweden', 'unknown', 'wales', 'usa']
+    'norway', 'scotland', 'sweden', 'unknown', 'usa',  'wales']
     
 export function flagPinsTableGxml(w=100, h=50) {
     const pad = 50
@@ -16,7 +16,7 @@ export function flagPinsTableGxml(w=100, h=50) {
     for (let i=0; i<flags.length; i++) {
         const row = Math.trunc(i/4)
         const col = i % 4
-        const flag =  flagPinGxml(`#flag-${flags[i]}`)
+        const flag = flagPinGxml(`#flag-${flags[i]}`)
         // console.log(flag.id, i, row, col)
         nestTl(flag, table, pad + col*(pad + w), pad + row*(pad + h))
     }

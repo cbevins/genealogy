@@ -5,7 +5,7 @@ import { belgium, canada, england, france, germany, ireland, netherlands,
     norway, scotland, sweden, unknown, wales, usa } from './flagsGxml.js'
 
 const flags = [belgium, canada, england, france, germany, ireland, netherlands,
-    norway, scotland, sweden, unknown, wales, usa]
+    norway, scotland, sweden, unknown, usa, wales]
     
 export function flagsTableGxml(w=100, h=50) {
     const pad = 50
