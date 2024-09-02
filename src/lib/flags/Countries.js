@@ -16,20 +16,32 @@ export const Countries = new Map([
     ['unknown country',  {abbr: 'Unk', flag: 'UNK', label: 'Unknown'}],
 ])
 
+/**
+ * @param {string} country
+ */
 export function countryAbbr(country) {
     const obj = Countries.get(country)
     return obj ? obj.abbr : '???' + country
 }
 
+/**
+ * @param {string} country
+ */
 export function countryFlag(country) {
     const obj = Countries.get(country)
     return obj ? obj.flag : 'UNK'
 }
 
+/**
+ * @param {string} country
+ */
 export function countryFlagHref(country) {
     return '#' + countryFlag(country)
 }
 
+/**
+ * @param {string} country
+ */
 export function countryLabel(country) {
     const obj = Countries.get(country)
     return obj ? obj.label : 'No Label for ' + country

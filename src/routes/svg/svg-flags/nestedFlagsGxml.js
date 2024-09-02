@@ -1,7 +1,8 @@
+// Sandbox 
 // Flag nested transforms
 import {nest, nestMid, nestTl } from '$lib'
 import { belgium, canada, england, france, germany, ireland, netherlands,
-    norway, scotland, sweden, unknown, wales, usa } from './svgFlags.js'
+    norway, scotland, sweden, unknown, wales, usa } from './flagsGxml.js'
 import { flagDefsGxml } from '$lib'
 
 export function nestedFlagsGxml() {

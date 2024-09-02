@@ -8,7 +8,7 @@
     <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
     Tailwind Examples
 </NavLi>
-<Dropdown class="w-full z-20" placement="right-start">
+<Dropdown class="w-full z-20" placement="left-start">
     <NavUl {activeUrl}>
         <NavLi class="cursor-pointer">
             Accordions
@@ -19,18 +19,41 @@
             <DropdownItem href="/tailwind/accordians/Zoltan">Accordians by Zoltan</DropdownItem>
         </Dropdown>
     </NavUl>
-    <DropdownItem href="/tailwind/alerts">Alert Examples</DropdownItem>
-    <DropdownItem href="/tailwind/buttons">Button Examples</DropdownItem>
-    <DropdownItem href="/tailwind/cards">Card Example</DropdownItem>
-    <DropdownItem href="/tailwind/containers">Containers Example</DropdownItem>
-    <DropdownItem href="/tailwind/flexbox/grids">Flexbox Grid Examples</DropdownItem>
-    <DropdownItem href="/tailwind/forms">Forms Examples</DropdownItem>
-    <DropdownItem href="/tailwind/headers">Header Examples</DropdownItem>
+    <DropdownItem href="/tailwind/alerts">Alerts</DropdownItem>
+    <DropdownItem href="/tailwind/buttons">Buttons</DropdownItem>
+    <DropdownItem href="/tailwind/cards">Cards</DropdownItem>
+    <DropdownItem href="/tailwind/forms">Forms</DropdownItem>
     <DropdownDivider />
-    <DropdownItem href="/tailwind/navigation/headers">Navigation Responsive Header</DropdownItem>
-    <DropdownItem href="/tailwind/navigation/tabs">Navigation Tabs</DropdownItem>
-    <DropdownDivider />
-    <DropdownItem href="/tailwind/paragraphs">Paragraph Examples</DropdownItem>
+    <NavUl {activeUrl}>
+        <NavLi class="cursor-pointer">
+            Navigation Components
+            <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
+        </NavLi>
+        <Dropdown class="w-full z-20" placement="left-start">
+            <DropdownItem href="/tailwind/navigation/headers">Navigation Responsive Header</DropdownItem>
+            <DropdownItem href="/tailwind/navigation/tabs">Navigation Tabs</DropdownItem>
+        </Dropdown>
+    </NavUl>
+    <NavUl {activeUrl}>
+        <NavLi class="cursor-pointer">
+            Containers, Flexbox
+            <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
+        </NavLi>
+        <Dropdown class="w-full z-20" placement="left-start">
+            <DropdownItem href="/tailwind/containers">Containers Example</DropdownItem>
+            <DropdownItem href="/tailwind/flexbox/grids">Flexbox Grid Examples</DropdownItem>
+        </Dropdown>
+    </NavUl>
+    <NavUl {activeUrl}>
+        <NavLi class="cursor-pointer">
+            Headers, Paragraphs
+            <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
+        </NavLi>
+        <Dropdown class="w-full z-20" placement="left-start">
+            <DropdownItem href="/tailwind/headers">Header Examples</DropdownItem>
+            <DropdownItem href="/tailwind/paragraphs">Paragraph Examples</DropdownItem>
+        </Dropdown>
+    </NavUl>
     <DropdownItem href="/tailwind/scrollable-fixed-height-table">Scrollable Fixed-height Table</DropdownItem>
     <DropdownItem href="/tailwind/treeview">Treeview Example</DropdownItem>
 </Dropdown>

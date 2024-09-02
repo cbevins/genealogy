@@ -1,3 +1,4 @@
+// Sandbox
 import { register, registerCenters, textEl } from '$lib'
 
 export function registeredElementsGxml() {

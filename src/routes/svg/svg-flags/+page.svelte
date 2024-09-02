@@ -2,36 +2,43 @@
     import Card from '$lib/svelte/Card.svelte'
     import H5c from '$lib/svelte/H5c.svelte'
 
-    import { gxmlStr } from '$lib'
+    import { gxmlStr } from '$lib/index.js'
     import { flagLegendGxml, flagDefsGxml } from '$lib'
     import { flagsTableGxml } from './flagsTableGxml.js'
+    import { flagPinsTableGxml } from './flagPinsTableGxml.js'
     import { nestedFlagsGxml } from './nestedFlagsGxml.js'
     import { registeredElementsGxml } from './registeredElsGxml.js'
     import { posterGxml } from './posterGxml.js'
 
     const flagLegend = flagDefsGxml()
+    // @ts-ignore
     flagLegend.push(flagLegendGxml(10, 10, 50, 0.4))
+
 </script>
 
-<Card><H5c>Flags from SVG GXML Elements</H5c>
+<Card><H5c>SVG Flag Pins (svgFlagsGxml.js)</H5c>
+    {@html gxmlStr(flagPinsTableGxml(100, 100))}
+</Card>
+
+<Card><H5c>Flags from SVG GXML Elements (flagsTableGxml.js)</H5c>
     {@html gxmlStr(flagsTableGxml(100, 50))}
 </Card>
 
-<Card><H5c>SVG Nested and Transformed Elements</H5c>
+<Card><H5c>SVG Nested and Transformed Elements (nestedFlagsGxml.js)</H5c>
         {@html gxmlStr(nestedFlagsGxml())}
 </Card>
 
-<Card><H5c>SVG Registered and Transformed Elements</H5c>
+<Card><H5c>SVG Registered and Transformed Elements (registeredElsGxml.js)</H5c>
     {@html gxmlStr(registeredElementsGxml())}
 </Card>
 
-<Card><H5c>SVG Flags Legend from GXML</H5c>
+<Card><H5c>SVG Flag Pins Legend from $lib/flagLegendGxml and $lib/flagDefGxml</H5c>
     <svg width="600" height="300" transform="scale(1)" style="background: grey">
         {@html gxmlStr(flagLegend)}
     </svg>
 </Card>
 
-<Card><H5c>Responsive SVG</H5c>
+<Card><H5c>Responsive SVG (hand coded in page)</H5c>
     <svg width="100%" height="100%" style="background: grey">
         <rect x="25%" y="25%" width="50%" height="50%" fill="red"/>
         <text x="50%" y="50%" text-anchor="middle">Responsive Rectangle</text>
@@ -42,7 +49,6 @@
     </svg>
 </Card>
 
-<Card><H5c>SVG Poster Using Element Fit</H5c>
+<Card><H5c>SVG Poster Using Element Fit (posterFxml.js)</H5c>
     {@html gxmlStr(posterGxml())}
 </Card>
-

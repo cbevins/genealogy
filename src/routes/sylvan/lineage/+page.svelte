@@ -1,4 +1,6 @@
-<script lang="ts">
+<script>
+// @ts-nocheck
+
     import { Tabs, TabItem } from 'flowbite-svelte'
     import { Lineage } from '$lib/index.js'
     import LineageChecklist from './LineageChecklist.svelte'

@@ -1,5 +1,5 @@
 <script>
-    import { NavLi, NavUl, Dropdown, DropdownItem, DropdownDivider } from 'flowbite-svelte'
+    import { NavLi, Dropdown, DropdownItem } from 'flowbite-svelte'
     import { ChevronDownOutline } from 'flowbite-svelte-icons'
     export let activeUrl
 </script>

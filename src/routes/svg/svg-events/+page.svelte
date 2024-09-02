@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
 	import { createEventDispatcher } from 'svelte'
     
     const colorToggled = 'green'
@@ -52,7 +54,7 @@
     ]
     // Focus event coordinates for blur (b), focus (f), focusin (fi), focusout (fo), pc
     const fevents = ['blur', 'focus', 'focusin', 'focusout']
-    $: fCoords = [b, f, fi, fo]
+    $: fItems = [b, f, fi, fo]
     console.clear()
 
     function efmt(e) {
@@ -261,21 +263,21 @@
         <table class="w-128 rounded-lg border-collapse bg-amber-500">
 			<thead class=" dark:bg-red-700">
                 <tr class="text-center text-lg">
-                    <th class="p-2 text-left font-semibold text-right">Mouse<br>Pointer<br>Event</th>
-                    <th class="p-2 text-left font-semibold text-right">Mouse<br>X</th>
-                    <th class="p-2 text-left font-semibold text-right">Mouse<br>Y</th>
-                    <th class="p-2 text-left font-semibold text-right">Pointer<br>X</th>
-                    <th class="p-2 text-left font-semibold text-right">Pointer<br>Y</th>
+                    <th class="p-2 font-semibold text-right">Mouse<br>Pointer<br>Event</th>
+                    <th class="p-2 font-semibold text-right">Mouse<br>X</th>
+                    <th class="p-2 font-semibold text-right">Mouse<br>Y</th>
+                    <th class="p-2 font-semibold text-right">Pointer<br>X</th>
+                    <th class="p-2 font-semibold text-right">Pointer<br>Y</th>
                 </tr>
             </thead>
             <tbody>
                 {#each events as event, e}
                 <tr class="border-t border-opacity-80 dark:border-gray-300 dark:bg-gray-100">
-                    <td class="px-2 text-left font-semibold text-right">{event}</td>
-                    <td class="px-2 text-left font-semibold text-right">{fmt(mpCoords[0][e].clientX)}</td>
-                    <td class="px-2 text-left font-semibold text-right">{fmt(mpCoords[0][e].clientY)}</td>
-                    <td class="px-2 text-left font-semibold text-right">{fmt(mpCoords[1][e].clientX)}</td>
-                    <td class="px-2 text-left font-semibold text-right">{fmt(mpCoords[1][e].clientY)}</td>
+                    <td class="px-2 font-semibold text-right">{event}</td>
+                    <td class="px-2 font-semibold text-right">{fmt(mpCoords[0][e].clientX)}</td>
+                    <td class="px-2 font-semibold text-right">{fmt(mpCoords[0][e].clientY)}</td>
+                    <td class="px-2 font-semibold text-right">{fmt(mpCoords[1][e].clientX)}</td>
+                    <td class="px-2 font-semibold text-right">{fmt(mpCoords[1][e].clientY)}</td>
                 {/each}
             </tbody>
         </table>
@@ -287,17 +289,17 @@
         <table class="w-128 rounded-lg border-collapse bg-amber-500">
 			<thead class=" dark:bg-red-700">
                 <tr class="text-center text-lg">
-                    <th class="p-2 text-left font-semibold text-right">Focus</th>
-                    <th class="p-2 text-left font-semibold text-right">X</th>
-                    <th class="p-2 text-left font-semibold text-right">Y</th>
+                    <th class="p-2 font-semibold text-right">Focus Event</th>
+                    <th class="p-2 font-semibold text-right">Source</th>
+                    <th class="p-2 font-semibold text-right">Target</th>
                 </tr>
             </thead>
             <tbody>
                 {#each fevents as fevent, f}
                 <tr class="border-t border-opacity-80 dark:border-gray-300 dark:bg-gray-100">
-                    <td class="px-2 text-left font-semibold text-right">{fevent}</td>
-                    <td class="px-2 text-left font-semibold text-right">{f}</td>
-                    <td class="px-2 text-left font-semibold text-right">{fmt(fCoords[f].clientY)}</td>
+                    <td class="px-2 font-semibold text-right">{fevent}</td>
+                    <td class="px-2 font-semibold text-right">{fItems[f].srcElement}</td>
+                    <td class="px-2 font-semibold text-right">{fItems[f].target}</td>
                 {/each}
             </tbody>
         </table>

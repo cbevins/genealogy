@@ -1,4 +1,5 @@
 export function flagDefsGxml(w=100, h=100) {
+    // Templates used to cinstruct flag <svg> elements
     const flag = {el: 'rect', x: 0, y: 0, width: w, height: h,
         fill: 'white', stroke: 'black', 'stroke-width': 0}
     const rect = {el: 'rect', x: 0, y: 0, width: w, height: h, fill: "none", stroke: 'none'}
@@ -7,6 +8,7 @@ export function flagDefsGxml(w=100, h=100) {
         {el: 'circle', cx: w/2, cy: h/2, r: w/2}
     ]}
 
+    // All flags are <svg> elements
     const bel ={el: 'svg', id: 'BEL', els: [
         {...flag, fill: '#fdda24'},
         {...rect, x: 0, y: 0, width: w/3, height: h, fill: "#000000"},

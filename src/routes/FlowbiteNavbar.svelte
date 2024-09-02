@@ -1,6 +1,8 @@
 <script>
+// @ts-nocheck
+
     import { page } from '$app/stores'
-    import { Button, Navbar, NavBrand, NavLi, NavUl, NavHamburger, Dropdown, DropdownItem } from 'flowbite-svelte'
+    import { Button, Navbar, NavBrand, NavLi, NavUl, NavHamburger, Dropdown, DropdownItem, MegaMenu } from 'flowbite-svelte'
     import { ChevronDownOutline } from 'flowbite-svelte-icons'
 	import PersonSelectorDrawer from '$lib/svelte/PersonSelectorDrawer.svelte'
     import CustomComponentsDropdown from './CustomComponentsDropdown.svelte'
@@ -11,6 +13,8 @@
     // BE SURE TO DEREFERENCE STORE VALUES USING '$subjectPerson'
     import { subjectPerson } from '$lib/sylvan/store.js'
 
+    // Utilize the href prop within the NavLi component to incorporate a hyperlink.
+    // To initiate the application of the active class, include the activeUrl prop within the NavUl component:
     $: activeUrl = $page.url.pathname
     let hidden = true
 </script>
@@ -32,7 +36,7 @@
             <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
         </NavLi>
         <Dropdown class="w-full z-20">
-            <DropdownItem href="/sylvan/lineage">Person Lineage</DropdownItem>
+            <DropdownItem href="/sylvan/lineage">Person Lineage and then a lot more text to follow</DropdownItem>
             <DropdownItem href="/sylvan/profile">Person Profiles</DropdownItem>
         </Dropdown>
 

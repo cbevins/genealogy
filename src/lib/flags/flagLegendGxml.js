@@ -1,5 +1,11 @@
+// @ts-ignore
 import { Countries } from './Countries.js'
 
+/**
+ * @param {number} x
+ * @param {number} y
+ * @param {number} diam
+ */
 export function flagLegendGxml(x, y, diam, scale=1) {
     const s = scale * diam/100
     const els = []
@@ -26,6 +32,12 @@ export function flagLegendGxml(x, y, diam, scale=1) {
     return els
 }
 
+/**
+ * @param {any[]} countries
+ * @param {number} x
+ * @param {number} y
+ * @param {number} diam
+ */
 export function flagTableGxml(countries, x, y, diam, scale=1) {
     const s = scale * diam/100
     const els = []
