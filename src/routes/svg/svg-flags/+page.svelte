@@ -1,18 +1,24 @@
 <script>
-    import { Li, List, Heading } from 'flowbite-svelte';
+    import { Li, List } from 'flowbite-svelte';
     import Card from '$lib/svelte/Card.svelte'
     import H from '$lib/svelte/H.svelte'
 
-    import { gxmlStr } from '$lib/index.js'
+    import { gxmlStr, nest, register } from '$lib/index.js'
     import { flagLegendGxml, flagDefsGxml } from '$lib'
     import { flagsTableGxml } from './flagsTableGxml.js'
-    import { flagPinsTableGxml } from './flagPinsTableGxml.js'
+    import { flagPinsTableGxml, flagPinsLegendGxml } from './flagPinsTableGxml.js'
     import { nestedFlagsGxml } from './nestedFlagsGxml.js'
     import { registeredElementsGxml } from './registeredElsGxml.js'
 
     const flagLegend = flagDefsGxml()
     // @ts-ignore
-    flagLegend.push(flagLegendGxml(10, 10, 50, 0.4))
+    flagLegend.push(flagLegendGxml(10, 10, 50, 0.4))    // (x, y, diam, scale)
+
+    // Setup for the updated flag pin legend (nested inside some larger SVG)
+    const mainSvg = {el: 'svg', width: 600, height: 400, els: []}
+    const smallSvg = flagPinsLegendGxml()
+    nest(smallSvg, 0, 0, mainSvg, 10, 10, 0.25)
+    nest(smallSvg, 0, 0, mainSvg, 500, 10, 0.3, 45)
 </script>
 
 <Card><div class="text-xl"><H>Flag Pins from SVG Elements V2</H></div>
@@ -24,6 +30,10 @@
         the flag pin &lt;defs&gt;, then calls flagPinGxml() to nest each country's flag into the SVG.</Li>
     </List>
     {@html gxmlStr(flagPinsTableGxml(100, 100))}
+</Card>
+
+<Card><div class="text-xl"><H>Flag Pin Legend from SVG Elements V2</H></div>
+    {@html gxmlStr(mainSvg)}
 </Card>
 
 <Card><div class="text-xl"><H>Flags from SVG GXML Elements V2</H></div>

@@ -91,7 +91,7 @@ export function nestTl(sourceEl, destEl, destX=0, destY=0, scale=1, degrees=0) {
 /**
  * An non-nesting placement operation that registers the 'subjectEl' local [x,y] point
  * relative to a 'referEl' local [x, y] point,
- * assuming both elements both share the same user coordinates.
+ * assuming both elements share the same user coordinates.
  * 
  * The overlay is accomplished by setting the 'transform' attribute on 'subjectEl'.
  * 

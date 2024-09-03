@@ -75,35 +75,3 @@ export function flagPinsGxml(w=200, h=400) {
     table.els.push(flagPinGxml('#flag-usa', 0, 0))
     return table
 }
-
-// TO DO! - this is from the old implementation
-/**
- * @param {number} x
- * @param {number} y
- * @param {number} diam
- */
-// export function flagPinsLegendGxml(x, y, diam, scale=1) {
-//     const s = scale * diam/100
-//     const els = []
-//     let row = 0
-//     for(const [, country] of Countries.entries()) {
-//         if (country.legend) {
-//             const href = '#' + country.flag
-//             els.push({el: 'g',
-//                 transform: `translate(${x}, ${y}) scale(${s})`,
-//                 els: [
-//                     {el: 'use', x: 0, y: row*120,
-//                         href: href,
-//                         filter: "url(#flag-lighting)",
-//                         'clip-path': "url(#flag-clipper)"
-//                     },
-//                     {el: 'text', x: 120, y: row*120+60, 'font-size': 48, els: [
-//                         {el: 'inner', content: country.label}]
-//                     }
-//                 ]
-//             })
-//             row++
-//         }
-//     }
-//     return els
-// }
