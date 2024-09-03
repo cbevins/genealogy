@@ -15,10 +15,16 @@
     flagLegend.push(flagLegendGxml(10, 10, 50, 0.4))    // (x, y, diam, scale)
 
     // Setup for the updated flag pin legend (nested inside some larger SVG)
-    const mainSvg = {el: 'svg', width: 600, height: 400, els: []}
+    const mainSvg = {el: 'svg', width: 600, height: 400, xmlns: "http://www.w3.org/2000/svg", els: []}
     const smallSvg = flagPinsLegendGxml()
     nest(smallSvg, 0, 0, mainSvg, 10, 10, 0.25)
     nest(smallSvg, 0, 0, mainSvg, 500, 10, 0.3, 45)
+
+    const dataBlob = new Blob([gxmlStr(mainSvg)], {
+            type: "application/json",})
+    const dataUrl = URL.createObjectURL(dataBlob)
+    let outputFileName = 'output.svg'
+
 </script>
 
 <Card><div class="text-xl"><H>Flag Pins from SVG Elements V2</H></div>
@@ -34,6 +40,23 @@
 
 <Card><div class="text-xl"><H>Flag Pin Legend from SVG Elements V2</H></div>
     {@html gxmlStr(mainSvg)}
+    
+    <div class="w-full mx-auto border-4 m-4 p-4 border-green-500">
+        <p class='p-2 text-center'>
+            <a id="dwn" href={dataUrl} download={outputFileName}
+                class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            >Save Edited Settings</a>
+        </p>
+
+        <div class="mb-5">
+            <label for="file-output" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Output File Name</label>
+            <input id="file_output" bind:value={outputFileName}
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required />
+        </div>
+    </div>
+
 </Card>
 
 <Card><div class="text-xl"><H>Flags from SVG GXML Elements V2</H></div>
