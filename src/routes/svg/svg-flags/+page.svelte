@@ -6,7 +6,8 @@
     import { gxmlStr, nest, register } from '$lib/index.js'
     import { flagLegendGxml, flagDefsGxml } from '$lib'
     import { flagsTableGxml } from './flagsTableGxml.js'
-    import { flagPinsTableGxml, flagPinsLegendGxml } from './flagPinsTableGxml.js'
+    import { flagPinsLegendGxml } from './flagPinsLegendGxml.js'
+    import { flagPinsTableGxml } from './flagPinsTableGxml.js'
     import { nestedFlagsGxml } from './nestedFlagsGxml.js'
     import { registeredElementsGxml } from './registeredElsGxml.js'
 

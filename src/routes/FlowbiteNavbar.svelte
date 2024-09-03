@@ -36,7 +36,8 @@
             <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
         </NavLi>
         <Dropdown class="w-full z-20">
-            <DropdownItem href="/sylvan/lineage">Person Lineage and then a lot more text to follow</DropdownItem>
+            <DropdownItem href="/sylvan/lineage">Person Lineage</DropdownItem>
+            <DropdownItem href="/sylvan/lineage-train">Lineage Train</DropdownItem>
             <DropdownItem href="/sylvan/profile">Person Profiles</DropdownItem>
         </Dropdown>
 

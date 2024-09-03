@@ -1,5 +1,6 @@
 // $lib candidate
-// Function to produce <svg> flag pin images using flagsGxml.js
+// Function to produce Gxml <svg> elements defining flag pin images
+// from flagsGxml.js functions
 import { belgium, canada, england, france, germany, ireland, netherlands,
     norway, scotland, sweden, unknown, wales, usa } from './flagsGxml.js'
 
@@ -42,36 +43,4 @@ export function flagPinDefsGxml(w=100, h=100) {
         unknown(w,h,0),
     ]}
     return defs
-}
-
-/**
- * Returns a <svg> el defining a circular flag image.
- * Requires that the flagPinDefsGxml.js els are loaded
- * into the top-level <svg>
- * 
- * @param {string} id id (href) of the predefined flag in the <defs> block
- * @param {number} x upper left corner x-coordinate
- * @param {number} y upper left corner y-coordinate
- * @param {number} scale scale
- * @param {number} width Not used
- * @param {number} height Not used
- * @returns A single Gxml JSON object with nested Gxml.
- */
-export function flagPinGxml(id, x=0, y=0, scale=1, width=100, height=100) {
-    return {el: 'svg', x: x, y: y, width: scale*width, height: scale*height, els: [
-    {el: 'g', transform: `scale(${scale}, ${scale})`, els: [
-        {el: 'use', x: 0, y: 0,
-            href: id,
-            filter: "url(#flag-lighting)",
-            'clip-path':"url(#flag-clipper)"}]
-    }]}
-}
-
-// Example of how to creates an <svg> with the flag pin defs
-export function flagPinsGxml(w=200, h=400) {
-    const table = {el: 'svg', width: w, height: h, style: 'background: grey',
-        els:[flagPinDefsGxml()]}
-    // @ts-ignore
-    table.els.push(flagPinGxml('#flag-usa', 0, 0))
-    return table
 }

@@ -1,9 +1,25 @@
 // $lib candidate
-// Functions that return an <svg> element containing a flag image
-// They may be used to create rectangular flags,
-// or clipped to produce flag pins such as in flagPinsGxml.js
+// Functions that return a Gxml <svg> element containing a flag image.
+// These images may be used to create <defs>, rectangular flags,
+// or clipped and lighted to produce flag pins such as in flagPinDefsGxml.js
 
 import { nest, nestTl, textEl } from '$lib'
+
+export const flagMethods = [
+    {method: belgium, id: 'belgium', label: 'Belgium'},
+    {method: canada, id: 'canada', label: 'Canada'},
+    {method: england, id: 'england', label: 'England'},
+    {method: france, id: 'france', label: 'France'},
+    {method: germany, id: 'germany', label: 'Germany'},
+    {method: ireland, id: 'ireland', label: 'Ireland'},
+    {method: netherlands, id: 'netherlands', label: 'Netherlands'},
+    {method: norway, id:'norway', label: 'Norway'},
+    {method: scotland, id:'scotland', label: 'Scotland'},
+    {method: sweden, id:'sweden', label: 'Sweden'},
+    {method: unknown, id:'inknown', label: 'Unknown'},
+    {method: usa, id:'usa', label: 'United States'},
+    {method: wales, id:'wales', label: 'Wales'},
+]
 
 /**
  * @param {number} w

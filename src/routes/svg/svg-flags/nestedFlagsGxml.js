@@ -1,9 +1,9 @@
-// Sandbox 
+// Sandbox demo/example of nesting and transforming flag images
 // Flag nested transforms
 import {nest, nestMid, nestTl } from '$lib'
 import { belgium, canada, england, france, germany, ireland, netherlands,
     norway, scotland, sweden, unknown, wales, usa } from './flagsGxml.js'
-import { flagDefsGxml } from '$lib'
+import { flagPinDefsGxml } from './flagPinDefsGxml.js'
 
 export function nestedFlagsGxml() {
     const stage = {el: 'svg', width: 700, height: 500, style: 'background: grey', els:[]}
@@ -16,7 +16,7 @@ export function nestedFlagsGxml() {
     nestTl(scotland(200,100), stage, 50, 10, 0.75, 45) 
     
     // Add flag defs (these are all preset at 100x100)
-    stage.els.push(flagDefsGxml())
+    stage.els.push(flagPinDefsGxml())
     // make sure to add 'width' and 'height' to the 'use'
     const use = {el: 'use', href: '#USA', x: 0, y: 0, width: 100, height: 100,
         filter: "url(#flag-lighting)", 'clip-path': "url(#flag-clipper)"}
@@ -29,11 +29,11 @@ export function nestedFlagsGxml() {
     nest(canada(200,100), 0, 0, stage, 0, 250, 0.5)
 
     //-----------------------------------------------------------
-    // USA rosette with no center
+    // USA rosette with no center (by using 0,0 coordinates)
     for (let degrees=0; degrees<359; degrees+=45) {
         nest(usa(200,100), 0, 0, stage, 350, 400, 0.5, degrees)
     }
-    // Germany rosette with 20 pixel center
+    // Germany rosette with 20 pixel center (by using -20, -20 rotation point)
     for (let degrees=0; degrees<359; degrees+=45) {
         nest(germany(200,100), -20, -20, stage, 550, 300, 0.5, degrees)
     }
