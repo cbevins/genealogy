@@ -1,10 +1,10 @@
 /**
- * svgHelpers.js
+ * gxmlSvg.js
  * Contains function to help construct SVG Gxml data structures.
  */
 
 /**
- * Fits the sourceEl into the destEl scaling either the sourceEL's
+ * Fits the sourceEl into the destEl scaling either the sourceEl's
  * 'width', 'height', or 'both'.
  * @param {*} sourceEl 
  * @param {*} destEl 

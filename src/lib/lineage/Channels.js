@@ -17,7 +17,7 @@ export class Channels extends Lineage {
         this._data.channels = this._traverse(this.rootNode(), 0)
         if (centerRoot) this.centerRootChannel()
         // this._flipFathersChannels()
-        // this.summary()
+        this.summary()
     }
 
     //--------------------------------------------------------------------------
@@ -70,7 +70,6 @@ export class Channels extends Lineage {
             node.birthState = node.person.birthState()
             node.birthYear = node.person.birthYear()
             node.label = node.person.label()
-            node.sheets = new Array(10).fill(false)
             this._data.yearMin = Math.min(this._data.yearMin, node.birthYear)
             this._data.yearMax = Math.max(this._data.yearMax, node.birthYear)
         }
@@ -130,8 +129,8 @@ export class Channels extends Lineage {
 
     // Returns an array of {node} references, sorted by birth date,
     // extracted from the Channels node list, but starting with the {node}
-    // matching the nameKey.  Node generation, sequence, channel index, etc
-    // are all mainatined relative to the Channels rootNode()
+    // matching the nameKey.  But the node's generation, sequence, channel index, etc
+    // are all mainatined relative to the Channels rootNode()!
     findBranchByNameKey(nameKey) {
         const node = this.findNodeByNameKey(nameKey)
         if (! node) return null
@@ -145,68 +144,5 @@ export class Channels extends Lineage {
         if (node.mother) ar = this._getBranch(node.mother, ar)
         ar.push(node)
         return ar
-    }
-
-    // Clone's the sheetDef,
-    // adds a 'sheet.nodes' prop filled its with CLONED nodes with a node.sheets[] property,
-    // adds a 'sheet.startNode' property to reference the starting node,
-    // adds a 'sheet.channels' property indicating next available channel index
-    // Returns a reference to the newly CLONED sheet
-    getSheetNodes(sheetDef) {
-        const sheet = {...sheetDef}
-        sheet.nodes = []
-        const startNode = this.findNodeByNameKey(sheet.start)
-        if (!startNode) throw new Error(`Bad sheet.start nameKey ${sheet.start}`)
-        sheet.startNode = {...startNode}
-        this._getSheetNodes(sheet.startNode, sheet)
-        this._packChannels(sheet)
-        return sheet
-    }
-    // Adds CLONED nodes to the sheet
-    // Each cloned node has a sheets[] property with TRUE where present on a sheet
-    _getSheetNodes(node, sheet) {
-        let father = null
-        let mother = null
-        for(let i=0; i<sheet.stops.length; i++) {
-            if(node.father) {
-                if (node.father.person.nameKey() === sheet.stops[i].after) {
-                    father = {...node.father}
-                    father.father = null
-                    father.mother = null
-                    father.sheets[sheet.number] = true
-                    sheet.nodes.push(father)
-                }
-            }
-            if (node.mother) {
-                if (node.mother.person.nameKey() === sheet.stops[i].after) {
-                    mother = {...node.mother}
-                    mother.father = null
-                    mother.mother = null
-                    mother.sheets[sheet.number] = true
-                    sheet.nodes.push(mother)
-                }
-            }
-        }
-        if (node.father && ! father) this._getSheetNodes(node.father, sheet)
-        if (node.mother && ! mother) this._getSheetNodes(node.mother, sheet)
-        const self = {...node}
-        self.sheets[sheet.number] = true
-        sheet.nodes.push(self)
-        return sheet
-    }
-    _packChannels(sheet) {
-        const oldChan = new Array(300).fill(0)
-        const newChan = new Array(300).fill(0)
-        sheet.nodes.forEach((node)=>{oldChan[node.channel]++})
-        let counter = 0
-        oldChan.forEach((n, idx) => { if (n) newChan[idx] = counter++ })
-        sheet.nodes.forEach((node)=>{
-            const was = node.channel
-            const now = newChan[was]
-            // console.log(`${sheet.number}: ${node.label}  ${was} => ${now}`)
-            node.channel = now
-        })
-        sheet.nodes.sort((a, b) => { return a.channel - b.channel })
-        return sheet
     }
 }

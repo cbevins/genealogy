@@ -1,6 +1,19 @@
 // Sandbox
+/**
+ * We have a 'page' sized SVG that will contain one of two grids.
+ * The two content grids are:
+ * - a blue one smaller than the container SVG, and
+ * - a green one larger than the container SVG.
+ * 
+ * We want to be able to entirely 'fit' either of these grids into the container SVG,
+ * by optionally have it exactly fit the containers width, or height.
+ */
 import { fit, nest, textEl } from '$lib'
 
+/**
+ * This defines a 'poster' with header, footer, left and right regions,
+ * and a central 'content region into which the grids must be 'fit'.
+ */
 export function posterGxml() {
     const svg = {el: 'svg', width: 850, height: 1100, style: "background: grey", els: []}
 
@@ -30,14 +43,19 @@ export function posterGxml() {
     const grid1 = gridGxml(10, 20, 12, 12, 'blue', 'Small Grid')
     const grid2 = gridGxml(10, 20, 120, 120, 'green', 'Large Grid')
 
+    // Select which grid to display here!!!
     const grid = grid2
     nest(grid, 0, 0, content, 0, 0)
-    fit(grid, content, 'height')
+    // fit(grid, content, 'height')
+    fit(grid, content, 'width')
 
     svg.els = [border, head, foot, left, right, content]
     return svg
 }
 
+/**
+ * Convenience function for creating a grid
+ */
 function gridGxml(cols, rows, colWd, rowHt, color, label) {
     const w = cols * colWd
     const h = rows * rowHt 

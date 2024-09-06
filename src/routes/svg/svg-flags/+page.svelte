@@ -15,6 +15,14 @@
     // @ts-ignore
     flagLegend.push(flagLegendGxml(10, 10, 50, 0.4))    // (x, y, diam, scale)
 
+    // How to display a <svg> scaled inside a display <svg>
+    // Note that we can display either:
+    // gxmlStr(flagPinsTable) for an unscaled version, or
+    // gxmlStr(flagPinsScaled)
+    const flagPinsScaled = {el: 'svg', width: 500, height: 500, style: 'background: magenta', els: []}
+    const flagPinsTable = flagPinsTableGxml()
+    nest(flagPinsTable, 0, 0, flagPinsScaled, 0, 0, 0.5, 0)
+
     // Setup for the updated flag pin legend (nested inside some larger SVG)
     const mainSvg = {el: 'svg', width: 600, height: 400, xmlns: "http://www.w3.org/2000/svg", els: []}
     const smallSvg = flagPinsLegendGxml()
@@ -25,7 +33,6 @@
             type: "application/json",})
     const dataUrl = URL.createObjectURL(dataBlob)
     let outputFileName = 'output.svg'
-
 </script>
 
 <Card><div class="text-xl"><H>Flag Pins from SVG Elements V2</H></div>
@@ -36,7 +43,10 @@
         <Li>The small script flagPinsTableGxml.js creates an SVG wrapper that includes
         the flag pin &lt;defs&gt;, then calls flagPinGxml() to nest each country's flag into the SVG.</Li>
     </List>
-    {@html gxmlStr(flagPinsTableGxml(100, 100))}
+    The original flagPinsTableGxml():
+    {@html gxmlStr(flagPinsTable)}
+    Scaled inside a display SVG:
+    {@html gxmlStr(flagPinsScaled)}
 </Card>
 
 <Card><div class="text-xl"><H>Flag Pin Legend from SVG Elements V2</H></div>

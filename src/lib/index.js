@@ -19,6 +19,7 @@ export { Sylvan } from './sylvan/Sylvan.js'
 export { getPersonSelectors } from './sylvan/singletons.js'
 export { getSylvan } from './sylvan/singletons.js'
 
+export { Channels } from './lineage/Channels.js'
 export { Demographics } from './lineage/Demographics.js'
 export { GenerationStats } from './lineage/GenerationStats.js'
 export { Lineage } from './lineage/Lineage.js'

@@ -5,7 +5,7 @@ import { flagMethods } from './flagsGxml.js'
 import { flagPinGxml } from './flagPinGxml.js'
 import { flagPinDefsGxml } from './flagPinDefsGxml.js'
 
-export function flagPinsTableGxml(w=100, h=50) {
+export function flagPinsTableGxml(w=100, h=75) {
     const pad = 50
     const width = 4 * (pad + w) + pad
     const height = (Math.trunc(flagMethods.length/4)+1) * (pad + h) + pad
