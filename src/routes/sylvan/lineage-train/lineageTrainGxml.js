@@ -12,25 +12,34 @@ import { fit, nest, textEl } from '$lib'
  * @returns Gxml <svg> element
  */
 export function lineageTrainGxml(geom, id='lineage') {
+    // preset poster dimensions
     const w = 8500      // page width
-    const h = 11000     // page height
-    const t = 100       // height of top (header) region
+    const t = 100       // Height of top (header) region
     const b = 100       // Height of bottom (footer) region
     const l = 100       // Width of left region
-    const r = 100       // width of righht region
+    const r = 100       // width of right region
+    
+    // Determine poster full height when the content must fit to the page width
+    const cw = w - l - r            // poster content region width
+    const scale = cw / geom.fullWd  // width fit scale factor
+    const ch = scale * geom.fullHt  // poster content region height
+    const h = t + ch + b            // poster full ht
+    console.log('geom wd', geom.fullWd, 'ht', geom.fullHt,
+        'content wd', cw, 'ht', ch,
+        'poster wd', w, 'ht', h) 
 
     const svg = {el: 'svg', id: id+'-svg', width: w, height: h,
-        style: "background: gray", els: []}
+        style: "background: green", els: []}
 
-    const border = {el: 'rect',  id: id+'-poster-border',
-        x: 0, y: 0, width: w, height: h,
-        fill: "white", stroke: "black",  'stroke-width': 4, els: []}
+    const border = {el: 'path',  id: id+'-poster-border',
+        d: `M 0 0 H ${w} V ${h} H 0 V 0`,
+        fill: 'none', stroke: "black",  'stroke-width': 40, els: []}
     
     const head = {el: 'rect', id: id+'-poster-header',
         x: 0, y: 0, width: w, height: t, fill:"cyan", els: []}
 
     const foot = {el: 'rect', id: id+'-poster-footer',
-        x: 0, y: h-b, width: w, height: b, fill:"cyan", els: []}
+        x: 0, y: h-b, width: w, height: b, fill:"red", els: []}
 
     const left = {el: 'rect', id: id+'-poster-left',
         x: 0, y: t, width: l, height: h-t-b, fill:"magenta", els: []}
@@ -38,53 +47,46 @@ export function lineageTrainGxml(geom, id='lineage') {
     const right = {el: 'rect', id: id+'-poster-right',
         x: w-r, y: t, width: r, height: h-t-b, fill:"magenta", els: []}
 
-    const cw = svg.width - left.width - right.width
-    const ch = svg.height - head.height - foot.height
-    const cx = left.width   // 650
-    const cy = head.height  // 900
-    const contentRegion = {el: 'svg', x: cx, y: cy, width: cw, height: ch,
+    const contentRegion = {el: 'svg', x: l, y: t, width: cw, height: ch,
         id: id+'-poster-content', style: 'background: "green"', els: []}
 
     const content = posterContent(geom)
-
-    // the following overlays the original view without any fit ...
-    // nest(content, 0, 0, contentRegion, 0, 0)
-
-    // the 'fit' view
-    fit(content, contentRegion, 'height')
-    // fit(content, contentRegion, 'width')
-    svg.els = [border, head, foot, left, right, contentRegion]
+    fit(content, contentRegion, 'width')
+    svg.els = [head, foot, left, right, contentRegion, border]
     return svg
 }
 
-function ctext(x, y, size, content) {
-    return {el: 'text', x: x, y: y, 'text-anchor': 'middle', 'font-size': size,
+function ctext(x, y, size, content) { return text(x, y, size, content, 'middle') }
+
+function ltext(x, y, size, content) { return text(x, y, size, content, 'start') }
+
+function text(x, y, size, content, anchor) {
+    return {el: 'text', x: x, y: y, 'text-anchor': anchor, 'font-size': size,
         els: [{el: 'inner', content: content}]}
 }
 
-function ltext(x, y, size, content) {
-    return {el: 'text', x: x, y: y, 'text-anchor': 'start', 'font-size': size,
-        els: [{el: 'inner', content: content}]}
-}
-
+// Create Gxml for the content using its on user space based on geom
 function posterContent(geom) {
-    const content = {el: 'svg', width: geom.fullWd, height: geom.fullHt, els: []}
+    const content = {el: 'svg', width: geom.fullWd, height: geom.fullHt,
+        els: []}
 
     const upper = {el: 'svg', width: geom.fullWd, height: geom.timelineHt, els:[
         {el: 'rect', x: 0, y: 0, width: geom.fullWd, height: geom.timelineHt,
             fill: 'yellow', stroke: 'black'}]}
 
-    const lower = {el: 'svg', width: geom.fullWd, height: geom.timelineHt, els:[
+    const chart = {el: 'svg',
+            width: geom.fullWd, height: geom.chartHt, els: [
+        {el: 'rect', x: 0, y: 0, width: geom.fullWd, height: geom.chartHt,
+            fill: 'white', stroke: 'black'}]}
+        
+    const lower = {el: 'svg',
+        width: geom.fullWd, height: geom.timelineHt, els:[
         {el: 'rect', x: 0, y: 0, width: geom.fullWd, height: geom.timelineHt,
             fill: 'yellow', stroke: 'black'}]}
 
-    const chart = {el: 'svg', width: geom.fullWd, height: geom.chartHt, els: [
-        {el: 'rect', x: 0, y: 0, width: geom.fullWd, height: geom.chartHt,
-            fill: 'none', stroke: 'black'}]}
-
-    nest(upper, 0, 0, content, 0, 0)
-    nest(chart, 0, 0, content, 0, geom.timelineHt)
-    nest(lower, 0, 0, content, 0, geom.fullHt - geom.timelineHt)
+    nest(upper, 0, 0, content, 0, geom.upperY)
+    nest(chart, 0, 0, content, 0, geom.chartY)
+    nest(lower, 0, 0, content, 0, geom.lowerY)
 
     // grid line template
     const line = {el: 'line', stroke: 'red', 'stroke-width': 1, els: []}

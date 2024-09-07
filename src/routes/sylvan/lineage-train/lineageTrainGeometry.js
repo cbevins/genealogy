@@ -45,6 +45,7 @@ export function lineageTrainGeometry(nodes) { // width=1000, height=2000) {
 
     // Determine range of years, channels, generations
     const [birthMin, birthMax, chanMin, chanMax, genMin, genMax] = nodeRanges(nodes)
+    const rows = chanMax - chanMin + 3  // 1 extra chanHt padding at top and bottom for links
     const yearMax = Math.trunc((birthMax+addYears) / yearsPerTic) * yearsPerTic
     const yearMin = Math.trunc((birthMin-1) / yearsPerTic) * yearsPerTic
 
@@ -74,24 +75,31 @@ export function lineageTrainGeometry(nodes) { // width=1000, height=2000) {
         yearsPerTic: yearsPerTic,
         yearWd: yearWd,
         // Calculate final sizes based on year and channel ranges
-        rows: chanMax - chanMin + 3,     // 1 extra chanHt padding at top and bottom for links
-        chartHt: (chanMax - chanMin + 3) * chanHt,
-        fullHt: (chanMax - chanMin + 1) * chanHt + 2 * timelineHt,
+        rows: rows, // includes 1 extra chanHt padding at top and bottom for links
+        chartHt: rows * chanHt,
+        fullHt: rows * chanHt + 2 * timelineHt,
         fullWd: (yearMax - yearMin) * yearWd,
     }
+    geom.upperY = 0
+    geom.chartY = geom.timelineHt
+    geom.lowerY = geom.chartY + geom.chartHt
+    geom.aspect = geom.fullHt / geom.fullWd
 
-    // Function that returns x-coordinate given the calendar year
+    // Function that returns the x-coordinate for a given calendar year
     geom.yearX = function (year) { return (year - this.yearMin) * this.yearWd }
-    // Function that returns y-coordinate given a channel index
+    // Function that returns y-coordinate for a given channel index
+    // (includes padding at top of 1 chanHt)
     geom.chanY = function (chanIdx) { return (chanIdx-this.chanMin+1) * this.chanHt + this.timelineHt }
     // Function that returns the person's gender color
     geom.color = function (node) { return node.person.isFemale() ? geom.femaleColor : geom.maleColor }
 
     positionNode(geom, geom.nodes[0])
+    console.log(geom)
     return geom
 }
 
-// Adds each node's prop.x and prop.y properties
+// Adds each node's x and y properties,
+// moving each child to the y midline between his/her parents
 function positionNode(geom, node) {
     // traverse to the end
     if (node.father) positionNode(geom, node.father)
@@ -101,6 +109,5 @@ function positionNode(geom, node) {
     node.y = node.chany
     if (node.father && node.mother) {
         node.y = (node.father.y + node.mother.y) / 2
-        console.log(`Changed y from ${node.chany} to ${node.y})`)
     }
 }

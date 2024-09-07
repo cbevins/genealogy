@@ -17,7 +17,7 @@ export class Channels extends Lineage {
         this._data.channels = this._traverse(this.rootNode(), 0)
         if (centerRoot) this.centerRootChannel()
         // this._flipFathersChannels()
-        this.summary()
+        // this.summary()
     }
 
     //--------------------------------------------------------------------------
