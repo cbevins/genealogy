@@ -4,16 +4,16 @@
     import H from '$lib/svelte/H.svelte'
 
     import { gxmlStr, nest, register } from '$lib/index.js'
-    import { flagLegendGxml, flagDefsGxml } from '$lib'
+    // import { flagLegendGxml, flagDefsGxml } from '$lib'
     import { flagsTableGxml } from './flagsTableGxml.js'
     import { flagPinsLegendGxml } from './flagPinsLegendGxml.js'
     import { flagPinsTableGxml } from './flagPinsTableGxml.js'
     import { nestedFlagsGxml } from './nestedFlagsGxml.js'
     import { registeredElementsGxml } from './registeredElsGxml.js'
 
-    const flagLegend = flagDefsGxml()
+    // const flagLegend = flagDefsGxml()
     // @ts-ignore
-    flagLegend.push(flagLegendGxml(10, 10, 50, 0.4))    // (x, y, diam, scale)
+    // flagLegend.push(flagLegendGxml(10, 10, 50, 0.4))    // (x, y, diam, scale)
 
     // How to display a <svg> scaled inside a display <svg>
     // Note that we can display either:
@@ -96,14 +96,14 @@
     <p>Demonstrates registration placement and transformation of non-nested elements</p>
     {@html gxmlStr(registeredElementsGxml())}
 </Card>
-
+<!-- 
 <Card><div class="text-xl"><H>SVG Flag Pins Legend V1</H></div>
     <p>This uses the Legacy $lib/flagLegendGxml and $lib/flagDefGxml code that should be
         replaced by flagsGxml.js, flagPinsGxml.js, approach.</p>
     <svg width="600" height="300" transform="scale(1)" style="background: grey">
         {@html gxmlStr(flagLegend)}
     </svg>
-</Card>
+</Card> -->
 
 <Card><div class="text-xl"><H>Responsive SVG Demo (hand coded in page)</H></div>
     <svg width="100%" height="100%" style="background: grey">

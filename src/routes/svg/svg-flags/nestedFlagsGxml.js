@@ -18,9 +18,9 @@ export function nestedFlagsGxml() {
     // Add flag defs (these are all preset at 100x100)
     stage.els.push(flagPinDefsGxml())
     // make sure to add 'width' and 'height' to the 'use'
-    const use = {el: 'use', href: '#USA', x: 0, y: 0, width: 100, height: 100,
+    const use = {el: 'use', href: '#flag-usa', x: 0, y: 0, width: 100, height: 100,
         filter: "url(#flag-lighting)", 'clip-path': "url(#flag-clipper)"}
-    nestMid(use, stage, 350, 50, 0.5, 45)
+    nestMid(use, stage, 250, 50, 0.5, 45)
 
     nest(belgium(200,100), 0, 0, stage, 0, 0, 0.5)
     nest(ireland(200,100), 200, 0, stage, 700, 0, 0.5)

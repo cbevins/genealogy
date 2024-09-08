@@ -21,6 +21,24 @@ export const flagMethods = [
     {method: wales, id:'wales', label: 'Wales'},
 ]
 
+export const countryFlags = new Map([
+    ['belgium', flagMethods[0]],
+    ['canada', flagMethods[1]],
+    ['england', flagMethods[2]],
+    ['france', flagMethods[3]],
+    ['germany', flagMethods[4]],
+    ['ireland', flagMethods[5]],
+    ['netherlands', flagMethods[6]],
+    ['norway', flagMethods[7]],
+    ['scotland', flagMethods[8]],
+    ['sweden', flagMethods[9]],
+    ['unknown', flagMethods[10]],
+    ['', flagMethods[10]],
+    ['united states', flagMethods[11]],
+    ['usa', flagMethods[11]],
+    ['wales', flagMethods[12]],
+])
+
 /**
  * @param {number} w
  * @param {number} h
