@@ -23,8 +23,8 @@ export function flagPinDefsGxml(w=100, h=100) {
     ]}
     
     // Text paths for flag buttons
-    const tpath1 = {el: 'path', id: 'text-path-lower', d: 'M 5 45 A 45 45 0 1 0 95 45'}
-    const tpath2 = {el: 'path', id: 'text-path-upper', d: 'M 5 70 A 45 45 0 1 1 95 70'}
+    const tpath1 = {el: 'path', id: 'text-path-lower', d: 'M 2 45 A 45 45 0 1 0 98 45'}
+    const tpath2 = {el: 'path', id: 'text-path-upper', d: 'M 5 75 A 45 45 0 1 1 95 75'}
 
     const defs = {el: 'defs', id: 'flag-pins-defs', els: [
         clip, tpath1, tpath2, filter,

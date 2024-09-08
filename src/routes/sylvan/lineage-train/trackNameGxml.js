@@ -15,19 +15,6 @@ function children(node) {
     return str
 }
 
-function gen(node) {
-    const gen = node.gen
-    const female = node.person.isFemale()
-    const p = female ? 'M' : 'F'
-    if (gen === 0) return 'Subject'
-    else if (gen === 1) return female ? 'Mother' : 'Father'
-    else if (gen === 2) return female ? 'Grand Mother' : 'Grand Father'
-    else if (gen === 3) return '1st GG' + p
-    else if (gen === 4) return '2nd GG' + p
-    else if (gen === 5) return '3rd GG' + p
-    return `${gen-2}th GG` + p
-}
-
 function suffixNoSeq(node) {
     return node.person.nameSuffixNoSeq()
     // let idx = suffix.search("#")
@@ -45,7 +32,7 @@ function name(node) {
 
 function life(node) {
     return node ?
-        (node.person.lifeSpan() + ' ' + gen(node) + ' [#' + node.seq + ']')
+        (node.person.lifeSpan() + ' [#' + node.seq + ']')
     : ''
 }
 
@@ -53,16 +40,6 @@ export function trackNameGxml(node, trackWidth, fontSize) {
     const els = []
     const xpt = node.child ? (node.x + node.child.x)/2 : node.x + trackWidth
     const anchor = node.child ? 'middle' : 'start'
-
-    // els.push({el: 'text',
-    //     x: xpt,
-    //     y: node.y - 3.5 * fontSize - 0.5 * trackWidth,
-    //     'text-anchor': anchor,
-    //     'font-family': "sans-serif",
-    //     'font-weight': "lighter",
-    //     'font-size': fontSize,
-    //     els: [{el: 'inner', content: gen(node)}]
-    // })
 
     els.push({el: 'text',
         x: xpt,

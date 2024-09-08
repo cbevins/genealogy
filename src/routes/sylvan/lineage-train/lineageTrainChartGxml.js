@@ -4,10 +4,25 @@
 import { nest } from '$lib'
 import { flagPinDefsGxml } from './flagPinDefsGxml.js'
 import { flagPinGxml } from './flagPinGxml.js'
+import { subjectGxml } from './subjectGxml.js'
 import { trackNameGxml } from './trackNameGxml.js'
+import { trainStationGxml } from './trainStationGxml.js'
 import { trainTracksGxml } from './trainTracksGxml.js'
 
 function ctext(x, y, size, content) { return text(x, y, size, content, 'middle') }
+
+function gen(node) {
+    const gen = node.gen
+    const female = node.person.isFemale()
+    const p = female ? 'M' : 'F'
+    if (gen === 0) return 'Subject'
+    else if (gen === 1) return female ? 'Mother' : 'Father'
+    else if (gen === 2) return female ? 'Grand Mother' : 'Grand Father'
+    else if (gen === 3) return '1st GG' + p
+    else if (gen === 4) return '2nd GG' + p
+    else if (gen === 5) return '3rd GG' + p
+    return `${gen-2}th GG` + p
+}
 
 function ltext(x, y, size, content) { return text(x, y, size, content, 'start') }
 
@@ -72,17 +87,14 @@ export function lineageTrainChartGxml(geom) {
 
     // 3: Birth year flag pins, name
     // Each node has {channel, birthCountry, birthState, birthYear, label, person} properties
-    for (let i=0; i<geom.nodes.length; i++) {
+    for (let i=1; i<geom.nodes.length; i++) {
         const node = geom.nodes[i]
-        const x = node.x
-        const y = node.y
-        chart.els.push({el: 'circle', cx: x, cy: y, r: geom.radius,
-            fill: 'none', stroke: geom.color(node), 'stroke-width': 4})
-        // Flag pin [x,y] are for the upper-left corner, NOT for the center,
-        // so translate it based on the flag pin radius
-        chart.els.push(flagPinGxml(node.birthCountry, x-geom.radius, y-geom.radius))
-        chart.els.push(ctext(x, y+8, 2*geom.fontSize, node.birthYear.toString()))
+        chart.els.push(trainStationGxml(node, geom,
+            geom.color(node), node.birthYear.toString(), gen(node)))
         chart.els.push(trackNameGxml(node, trackWidth, geom.fontSize))
     }
+    
+    // 4: Special handling for subject and siblings
+    chart.els.push(subjectGxml(geom, trackWidth))
     return content
 }

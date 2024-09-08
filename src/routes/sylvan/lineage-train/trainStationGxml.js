@@ -1,71 +1,48 @@
-/**
- * Returns an array of Gxml JSON objects defining a Lineage Train Station image
- * with a national flag background, year-of-birth, and generation lable.
- * 
- * @param {integer} year Year of birth
- * @param {integer} chan Channel index
- * @param {*} flagRef Something like '#NOR' or '#USA'
- * @param {string} gen Generation label, something like '13th GGP'
- * @param {string} color COlor specification for enclosing circle
- * @param {*} scale scale
- * @param {*} width Not used
- * @param {*} height Not used
- * @returns A single Gxml JSON object with nested Gxml.
- */
-import { flagGxml } from '../PosterSvg/flagGxml.js'
+import { flagPinGxml } from './flagPinGxml.js'
 
-export function trainStationGxml(x, y, flagRef='#USA', year,
-    gen='1st GGP', color='blue', scale=1, width=100, height=100) {
-    const fontSize = scale * 28
+// node = {x:, y:, birthCountry:, }
+export function trainStationGxml(node, geom, color, upperText, lowerText) {
+    const fontColor = (node.birthCountry === 'Germany') ? 'white' : 'black'
 
-    const flagDiam = 100    // do not change --- this is from the flag <defs>!!!
-    const flagRadius = flagDiam / 2
-    const flagScale = 0.9
-    const flagPos = (1-flagScale) * flagRadius
-    const flagDisc = flagGxml(flagRef, flagPos, flagPos, flagScale,
-        flagDiam/flagScale, flagDiam/flagScale)
+    // Flag pin [x,y] are for the upper-left corner, NOT for the center,
+    // so translate it based on the flag pin radius
+    const flagPin = flagPinGxml(node.birthCountry,
+        node.x - geom.radius, node.y - geom.radius)
 
-    const fontColor = (flagRef==='#GER') ? 'white' : 'black'
-    const yearText = {el: 'text',
+    // Birth year on a curved path along inside top of disc
+    const upperPath = {el: 'text',
         'text-anchor': 'middle',
-        'font-size': fontSize,
+        'font-size': 2*geom.fontSize,
         'font-weight': 'bold',
         stroke: fontColor,
         fill: fontColor,
         els: [
             {el: 'textPath', href: '#text-path-upper', startOffset: '50%', els: [ 
-                {el: 'inner', content: `${year}`}
+                {el: 'inner', content: upperText }
             ]},
         ]
     }
 
-    const genText = {el: 'text',
+    const lowerPath = {el: 'text',
         'text-anchor': 'middle',
-        'font-size': fontSize,
+        'font-size': 1.5 * geom.fontSize,
         'font-weight': 'bold',
             els: [
-                {el: 'textPath', href: '#text-path-lower', startOffset: '50%', els: [ 
-                    {el: 'inner', content: gen}
+                {el: 'textPath',
+                    href: '#text-path-lower', startOffset: '50%', els: [ 
+                    {el: 'inner', content: lowerText}
                 ]},
         ]}
 
-    const ring = {el: 'circle',
-        cx: flagRadius,
-        cy: flagRadius,
-        r: 0.9 * flagRadius,
+    const border = {el: 'circle',
+        cx: node.x,
+        cy: node.y,
+        r: geom.radius,
         fill: 'none',
         stroke: color,
-        'stroke-width': scale * 8
-    }
-
-    return {el: 'svg',
-        x: x,
-        y: y,
-        width: scale*width,
-        height: scale*height,
-        els: [
-            {el: 'g', transform: `scale(${scale}, ${scale})`, els: [
-                flagDisc, yearText, genText, ring]}
-        ]
-    }
+        'stroke-width': 6}
+        
+    flagPin.els.push(upperPath)
+    flagPin.els.push(lowerPath)
+    return {el: 'g', els: [border, flagPin]}
 }

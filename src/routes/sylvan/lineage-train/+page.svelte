@@ -9,7 +9,7 @@
 
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
     import { subjectPerson } from '$lib/sylvan/store.js'
-
+    console.clear()
     $: singlePage = true
     $: pageWd = 68
     $: pageHt = 11.0
