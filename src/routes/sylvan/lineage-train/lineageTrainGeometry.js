@@ -32,7 +32,7 @@ export function lineageTrainGeometry(nodes) { // width=1000, height=2000) {
     // SVG width and height basis
     // The native diameter of the flag pin serves as the basis of all poster content units
     const basis = 100
-    const chanPad = 10               // padding between channels
+    const chanPad = 20               // padding between channels
     const chanHt = basis + chanPad  // channel (row) height
     const yearWd = basis / 5        // the flag pin spans 5 years horizonatlly
     const yearsPerTic = 10          // years per column tic mark

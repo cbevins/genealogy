@@ -11,7 +11,7 @@
     import { subjectPerson } from '$lib/sylvan/store.js'
 
     $: singlePage = true
-    $: pageWd = 8.5
+    $: pageWd = 68
     $: pageHt = 11.0
     $: channels = new Channels($subjectPerson, true)
 
@@ -26,7 +26,7 @@
             const viewBox = `0 0 ${posterGxml.width} ${posterGxml.height}`
             // console.log('viewBox', viewBox)
             pageHt = posterGxml.height * pageWd / posterGxml.width
-            const displaySvg = {el: 'svg', style: 'background: green',
+            const displaySvg = {el: 'svg', style: 'background: white',
                 width: `${pageWd}in`, height: `${pageHt}in`,
                 viewBox: viewBox, els: []}
             nest(posterGxml, 0, 0, displaySvg, 0, 0, 1, 0)
