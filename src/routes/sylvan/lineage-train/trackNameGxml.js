@@ -1,6 +1,7 @@
 function birthPlace(node) {
     const place = node.person.birthPlace()
-    const text = place.text()
+    // const text = place.text()
+    // return text
     return node.person.birthState() + ', ' + node.person.birthCountry()
 }
 
@@ -9,9 +10,22 @@ function children(node) {
     let n = 0
     if (node.person.isFemale()) {
         n = node.person.children().length
-        str = (n===1) ? ' (1 child)' : ` (${n} children)`
+        str = (n===1) ? ' (1 known child)' : ` (${n} known children)`
     }
     return str
+}
+
+function gen(node) {
+    const gen = node.gen
+    const female = node.person.isFemale()
+    const p = female ? 'M' : 'F'
+    if (gen === 0) return 'Subject'
+    else if (gen === 1) return female ? 'Mother' : 'Father'
+    else if (gen === 2) return female ? 'Grand Mother' : 'Grand Father'
+    else if (gen === 3) return '1st GG' + p
+    else if (gen === 4) return '2nd GG' + p
+    else if (gen === 5) return '3rd GG' + p
+    return `${gen-2}th GG` + p
 }
 
 function suffixNoSeq(node) {
@@ -20,75 +34,73 @@ function suffixNoSeq(node) {
     // return (idx >= 0) ? (suffix.slice(0, idx-1)).trim() : suffix.trim()
 }
 
-function firstNames(node) {
-    return node
-        ? '#' + node.seq + ' '
-            + (node.person.namePrefix()
-            + ' ' + node.person.nameGiven()).trim()
+function name(node) {
+    return node? 
+        (node.person.namePrefix() + ' '
+            + node.person.nameGiven() + ' '
+            + node.person.nameSurnames() + ' '
+            + suffixNoSeq(node)).trim()
         : ''
 }
 
-function lastNames(node) {
-    return node ? (node.person.nameSurnames() + ' ' + suffixNoSeq(node) + node.person.lifeSpan())
-        : ''
+function life(node) {
+    return node ?
+        (node.person.lifeSpan() + ' ' + gen(node) + ' [#' + node.seq + ']')
+    : ''
 }
 
-function nameX(geom, node) {
-    if (node ) {
-        const x2 = node.child ? node.child.x : geom.yearX(geom.yearMax)
-        // const childYear = node.child ? node.child.birthYear : node.birthYear + this.addYears
-        // return this.yearX((node.birthYear + childYear) / 2)
-        return (node.x + x2) / 2
-    }
-    return 0
-}
-
-function nameY(geom, node) {
-    return node ? node.y - 0.6 * geom.trackWidth : 0
-}
-
-export function trackNameGxml(geom, node, anchor="middle") {
+export function trackNameGxml(node, trackWidth, fontSize) {
     const els = []
-    const x = nameX(geom, node)
-    const y = nameY(geom, node)
+    const xpt = node.child ? (node.x + node.child.x)/2 : node.x + trackWidth
+    const anchor = node.child ? 'middle' : 'start'
+
+    // els.push({el: 'text',
+    //     x: xpt,
+    //     y: node.y - 3.5 * fontSize - 0.5 * trackWidth,
+    //     'text-anchor': anchor,
+    //     'font-family': "sans-serif",
+    //     'font-weight': "lighter",
+    //     'font-size': fontSize,
+    //     els: [{el: 'inner', content: gen(node)}]
+    // })
 
     els.push({el: 'text',
-        x: x,
-        y: y - 1.6 * geom.fontSize,
+        x: xpt,
+        y: node.y - 1.6 * fontSize - 0.5 * trackWidth,
         'text-anchor': anchor,
         'font-family': "sans-serif",
         'font-weight': "bold",
-        'font-size': 1.5 * geom.fontSize,
-        els: [{el: 'inner', content: firstNames(node)}]
+        'font-size': 2 * fontSize,
+        els: [{el: 'inner', content: name(node)}]
     })
 
     els.push({el: 'text',
-        x: x,
-        y: y - 0.2 * geom.fontSize,
+        x: xpt,
+        y: node.y - 0.2 * fontSize - 0.5 * trackWidth,
         'text-anchor': anchor,
         'font-family': "sans-serif",
-        'font-weight': "bold",
-        'font-size': 1.5 * geom.fontSize,
-        els: [{el: 'inner', content: lastNames(node)}]
+        'font-weight': "light",
+        'font-size': fontSize,
+        els: [{el: 'inner', content: life(node)}]
     })
 
     els.push({el: 'text',
-        x: x,
-        y: y + 1.6 * geom.trackWidth,
+        x: xpt,
+        y: node.y + 1.6 * fontSize,
         'text-anchor': anchor,
         'font-family': "sans-serif",
         'font-weight': "lighter",
-        'font-size': 1.2 * geom.fontSize,
+        'font-size': 1.2 * fontSize,
         els: [{el: 'inner', content: birthPlace(node)}]
     })
     
     els.push({el: 'text',
-        x: x,
-        y: y + 2.2 * geom.trackWidth,
+        x: xpt,
+        y: node.y + 3 * fontSize,
         'text-anchor': anchor,
         'font-family': "sans-serif",
         'font-weight': "lighter",
-        'font-size': 1.2 * geom.fontSize,
+        'font-size': 1.2 * fontSize,
         els: [{el: 'inner', content: children(node)}]
     })
     return els

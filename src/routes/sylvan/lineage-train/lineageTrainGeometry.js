@@ -40,7 +40,7 @@ export function lineageTrainGeometry(nodes) { // width=1000, height=2000) {
     const addYears = 30             // number of years to add to max birth year
     const femaleColor = "magenta"
     const maleColor = "blue"
-    const fontSize = 10
+    const fontSize = 16
     const timelineHt = chanHt
 
     // Determine range of years, channels, generations
