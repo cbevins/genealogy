@@ -14,10 +14,10 @@ import { trainTracksGxml } from './trainTracksGxml.js'
 export function lineageTrainPosterGxml(geom, id='lineage') {
     // preset poster dimensions
     const w = 8500      // Poster full sheet width
-    const t = 100       // Height of poster's top (header) region
+    const t = 200       // Height of poster's top (header) region
     const b = 100       // Height of poster's bottom (footer) region
-    const l = 100       // Width of poster's left region
-    const r = 100       // Width of poster's right region
+    const l = 0       // Width of poster's left region
+    const r = 0       // Width of poster's right region
     const m = 40        // Width of poster's margin (border) region
 
     // Determine poster's full height when the content must fit to the page width

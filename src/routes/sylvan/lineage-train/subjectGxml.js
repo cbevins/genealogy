@@ -1,5 +1,4 @@
 // Adds subject and siblings
-import { flagPinGxml } from './flagPinGxml.js'
 import { trainStationGxml } from './trainStationGxml.js'
 import { trainTracksGxml } from './trainTracksGxml.js'
 
@@ -20,24 +19,21 @@ export function subjectGxml(geom, trackWidth) {
 
     // Since children[] is an array of *Person*s, not *node*s,
     // we need to assign x-y coordinates and birth country
-    const offset = geom.radius
-    
     const els = []
     for(let i=0; i<children.length; i++) {
         const child = children[i]
         const birthYear = child.birthYear()
-        let birthPlace = child.birthPlace().text()
+        const birthPlace = child.birthPlace().text()
         const x1 = geom.yearX(birthYear)
 
         let endYear = child.deathYear()
         endYear = endYear ? endYear : geom.yearMax
         const x2 = geom.yearX(endYear)
-
         const y = subject.y + (i - subjectIdx) * geom.chanHt
         
         // train tracks
         const color = child.isFemale() ? geom.femaleColor : geom.maleColor
-        const path = `M ${subject.x} ${y+offset} L ${x2} ${y+offset}`
+        const path = `M ${subject.x} ${y+geom.radius} L ${x2} ${y+geom.radius}`
         els.push(trainTracksGxml(path, trackWidth, color))
 
         // train names and signage

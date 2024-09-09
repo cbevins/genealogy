@@ -3,6 +3,7 @@
     import { gxmlStr, nest, register, textEl } from '$lib/index.js'
     import { lineageTrainPosterGxml } from './lineageTrainPosterGxml.js'
     import { lineageTrainGeometry } from './lineageTrainGeometry.js'
+    import { Branch } from './Branch.js'
 
     import H5c from '$lib/svelte/H.svelte'
     import {Radio} from 'flowbite-svelte'
@@ -10,6 +11,7 @@
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
     import { subjectPerson } from '$lib/sylvan/store.js'
     console.clear()
+    
     $: singlePage = true
     $: pageWd = 68
     $: pageHt = 11.0
@@ -17,8 +19,19 @@
 
     function html(subject, pageWd) {
         channels = new Channels(subject, true)
-        // Pass in just the Channels nodes to be displayed
-        const geom = lineageTrainGeometry(channels.nodesBySeq())
+        // Determine which nodes are to be displayed
+        const nodes = channels.nodesBySeq()
+
+        // EXPERIMENTAL
+        const bevinsNode = channels.findNodeByNameKey('SamuelBevins1878')
+        const branch = new Branch(nodes[0], bevinsNode)
+        branch.show()
+        const collinsNode = channels.findNodeByNameKey('HattieJaneCollins1889')
+        const heddensNode = channels.findNodeByNameKey('RalphVernonHeddens1909')
+        const nattrassNode = channels.findNodeByNameKey('MargaretEvaNattrass1914')
+
+        // Pass in *just* the Channels nodes to be displayed
+        const geom = lineageTrainGeometry(nodes)
         const posterGxml = lineageTrainPosterGxml(geom)
 
         // If fitting entire chart on one page, determine its height
