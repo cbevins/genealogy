@@ -85,6 +85,7 @@ export function lineageTrainChartGxml(geom) {
         chart.els.push(trainStationGxml(node, geom,
             geom.color(node), node.birthYear.toString(), gen(node)))
         chart.els.push(trackNameGxml(node, trackWidth, geom.fontSize))
+        // console.log(i, node.seq, node.channel, node.y, node.label)
     }
     
     // Add subject and sibling birth year flag pins and names to the chart

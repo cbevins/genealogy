@@ -3,8 +3,6 @@
     import { gxmlStr, nest, register, textEl } from '$lib/index.js'
     import { lineageTrainPosterGxml } from './lineageTrainPosterGxml.js'
     import { lineageTrainGeometry } from './lineageTrainGeometry.js'
-    import { Branch } from './Branch.js'
-
     import H5c from '$lib/svelte/H.svelte'
     import {Radio} from 'flowbite-svelte'
 
@@ -23,7 +21,7 @@
     const pageWds = [8.5, 11, 17, 34, 68]
 
     $: singlePage = true
-    $: pageWd = 68
+    $: pageWd = 11
     $: pageHt = 11.0
     $: channels = new Channels($subjectPerson, true)
     $: branchNameKey = branchNameKeys[0]
@@ -32,7 +30,7 @@
         channels = new Channels(subject, true, nameKey)
         const channelNodes = channels.channelNodesBySeq()
         const geom = lineageTrainGeometry(channelNodes)
-        // console.log(geom)
+        console.log(geom)
         const posterGxml = lineageTrainPosterGxml(geom)
 
         // If fitting entire chart on one page, determine its height
