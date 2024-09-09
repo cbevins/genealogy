@@ -90,7 +90,8 @@ export function lineageTrainGeometry(nodes) { // width=1000, height=2000) {
     geom.yearX = function (year) { return (year - this.yearMin) * this.yearWd }
     // Function that returns y-coordinate for a given channel index
     // (includes padding at top of 1 chanHt)
-    geom.chanY = function (chanIdx) { return (chanIdx-this.chanMin+1) * this.chanHt + this.timelineHt }
+    geom.chanY = function (chanIdx) {
+        return (chanIdx-this.chanMin+1) * this.chanHt + this.timelineHt }
     // Function that returns the person's gender color
     geom.color = function (node) { return node.person.isFemale() ? geom.femaleColor : geom.maleColor }
 
@@ -110,4 +111,5 @@ function positionNode(geom, node) {
     if (node.father && node.mother) {
         node.y = (node.father.y + node.mother.y) / 2
     }
+    // console.log(node.seq, node.channel, node.x, node.y, node.label)
 }

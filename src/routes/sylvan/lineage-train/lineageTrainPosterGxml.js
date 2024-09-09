@@ -38,7 +38,7 @@ export function lineageTrainPosterGxml(geom, id='lineage') {
         x: m, y: m, width: w-2*m, height: t, fill:"cyan", els: []}
 
     const foot = {el: 'rect', id: id+'-poster-footer',
-        x: m, y: h-b-m, width: w-2*m, height: b, fill:"red", els: []}
+        x: m, y: h-b-m, width: w-2*m, height: b, fill:"cyan", els: []}
 
     const left = {el: 'rect', id: id+'-poster-left',
         x: m, y: t+m, width: l, height: h-t-b-2*m, fill:"magenta", els: []}

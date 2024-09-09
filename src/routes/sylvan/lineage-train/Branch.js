@@ -1,4 +1,3 @@
-
 export class Branch {
     constructor(rootNode, branchNode) {
         this.rootNode = rootNode
@@ -8,7 +7,22 @@ export class Branch {
         this.setBranch(rootNode, branchNode)
     }
 
-    nodes() { return this.nodes }
+    nodesBySeq() { this.nodes }
+
+    // rootNode and branchNode are members of a Channels.nodes
+    prune(rootNode, branchNode) {
+        this.nodes = []
+        // Traverse backwards for offspring and spouses
+        let parent = branchNode
+        while(parent.child) {
+            if (parent.child.father !== parent) {
+                parent.child.father = null
+            } else if (parent.child.mother !== parent) {
+                parent.child.mother = null
+            }
+        }
+        // Now traverse from root
+    }
 
     setBranch(rootNode, branchNode) {
         this.traverse(rootNode, branchNode)
@@ -31,12 +45,17 @@ export class Branch {
             parent.child.inBranch = true
             parent = parent.child
         }
+        // Nodes must be sorted by channel-seq for positioning to work
+        this.nodes.sort((a, b) => {
+            const dc = a.channel - b.channel
+            if (dc !== 0) return dc
+            return a.seq - b.seq })
     }
 
     show() {
         for(let i=0; i<this.nodes.length; i++) {
             const node = this.nodes[i]
-            console.log(node.channel, node.person.label())
+            console.log('show', i, node.seq, node.channel, node.person.label())
         }
     }
 

@@ -11,27 +11,28 @@
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
     import { subjectPerson } from '$lib/sylvan/store.js'
     console.clear()
-    
+
+    const branchNameKeys = [
+        'CollinDouglasBevins1952',
+        'SamuelBevins1878',
+        'HattieJaneCollins1889',
+        'RalphVernonHeddens1909',
+        'MargaretEvaNattrass1914'
+    ]
+
+    const pageWds = [8.5, 11, 17, 34, 68]
+
     $: singlePage = true
     $: pageWd = 68
     $: pageHt = 11.0
     $: channels = new Channels($subjectPerson, true)
+    $: branchNameKey = branchNameKeys[0]
 
-    function html(subject, pageWd) {
-        channels = new Channels(subject, true)
-        // Determine which nodes are to be displayed
-        const nodes = channels.nodesBySeq()
-
-        // EXPERIMENTAL
-        const bevinsNode = channels.findNodeByNameKey('SamuelBevins1878')
-        const branch = new Branch(nodes[0], bevinsNode)
-        branch.show()
-        const collinsNode = channels.findNodeByNameKey('HattieJaneCollins1889')
-        const heddensNode = channels.findNodeByNameKey('RalphVernonHeddens1909')
-        const nattrassNode = channels.findNodeByNameKey('MargaretEvaNattrass1914')
-
-        // Pass in *just* the Channels nodes to be displayed
-        const geom = lineageTrainGeometry(nodes)
+    function html(subject, pageWd, nameKey) {
+        channels = new Channels(subject, true, nameKey)
+        const channelNodes = channels.channelNodesBySeq()
+        const geom = lineageTrainGeometry(channelNodes)
+        // console.log(geom)
         const posterGxml = lineageTrainPosterGxml(geom)
 
         // If fitting entire chart on one page, determine its height
@@ -49,18 +50,25 @@
 </script>
 
 <H5c>Lineage Train Map for {channels.rootPerson().label()}</H5c>
-<p class="mb-4 font-semibold text-gray-900 dark:text-white">
+
+<p class="mb-2 font-semibold text-gray-900 dark:text-white">
     Page {pageWd}" x {pageHt.toFixed(3)}"</p>
 <ul class="items-center w-80 rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
+    {#each pageWds as wd}
     <li class="w-16"><Radio name="page-size" class="p-3"
-        bind:group={pageWd} value={8.5} checked={true} >8.5"</Radio></li>
-    <li class="w-16"><Radio name="page-size" class="p-3"
-        bind:group={pageWd} value={11} checked={true} >11"</Radio></li>
-    <li class="w-16"><Radio name="page-size" class="p-3"
-        bind:group={pageWd} value={17}>17"</Radio></li>
-    <li class="w-16"><Radio name="page-size" class="p-3"
-        bind:group={pageWd} value={34}>34"</Radio></li>
-    <li class="w-16"><Radio name="page-size" class="p-3"
-        bind:group={pageWd} value={68}>68"</Radio></li>
-    </ul>
-{@html gxmlStr(html($subjectPerson, pageWd))}
+        bind:group={pageWd} value={wd} checked={pageWd===wd} >{wd}"</Radio></li>
+    {/each}
+</ul>
+
+<p class="mt-2 mb-4 font-semibold text-gray-900 dark:text-white">
+    Display Lineage Branch for Branch {branchNameKey}</p>
+<ul class="items-center w-300 rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
+    {#each branchNameKeys as key, i}
+    <li class="w-60"><Radio name="branck-name-key" class="p-3"
+        bind:group={branchNameKey} value={key} checked={branchNameKey===key}>
+        {key}</Radio>
+    </li>
+    {/each}
+</ul>
+
+{@html gxmlStr(html($subjectPerson, pageWd, branchNameKey))}

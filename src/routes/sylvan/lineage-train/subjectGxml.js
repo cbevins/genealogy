@@ -6,7 +6,12 @@ export function subjectGxml(geom, trackWidth) {
     const nodes = geom.nodes
     // First get siblings and their birth ranges
     const subject = nodes[0]
-    const children = subject.mother.person.children()
+    let children = [subject.person]
+    if (subject.mother) {
+        children = subject.mother.person.children()
+    } else if (subject.father) {
+        children = subject.mother.person.children()
+    }
     let yearMin = 9999
     let yearMax = 0
     let subjectIdx = 0
@@ -17,9 +22,19 @@ export function subjectGxml(geom, trackWidth) {
         if (child === nodes[0].person) subjectIdx = i
     }
 
+    // Determine siblings' y position
+    const yf = subject.father ? subject.father.y : 0
+    const ym = subject.mother ? subject.mother.y : geom.chartHt - geom.chanHt
+    const ytop = Math.min(yf, ym)
+    const ybot = Math.max(yf, ym)
+    const ymid = (ytop + ybot) / 2
+    const yreq = children.length * geom.chanHt
+    const yfirst = ymid - yreq/2
+
     // Since children[] is an array of *Person*s, not *node*s,
     // we need to assign x-y coordinates and birth country
     const els = []
+    let y = yfirst
     for(let i=0; i<children.length; i++) {
         const child = children[i]
         const birthYear = child.birthYear()
@@ -29,7 +44,7 @@ export function subjectGxml(geom, trackWidth) {
         let endYear = child.deathYear()
         endYear = endYear ? endYear : geom.yearMax
         const x2 = geom.yearX(endYear)
-        const y = subject.y + (i - subjectIdx) * geom.chanHt
+        // const y = subject.y + (i - subjectIdx) * geom.chanHt
         
         // train tracks
         const color = child.isFemale() ? geom.femaleColor : geom.maleColor
@@ -60,6 +75,9 @@ export function subjectGxml(geom, trackWidth) {
         // train stations
         const fake = {x: x1, y: y+geom.radius, birthCountry: child.birthCountry()}
         els.push(trainStationGxml(fake, geom, color, birthYear.toString(), 'Sibling'))
+
+        // Next y
+        y += geom.chanHt
     }
     return els
 }

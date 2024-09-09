@@ -6,18 +6,42 @@ import { Lineage } from './Lineage.js'
 import { idGenCount } from '../helpers/generations.js'
 
 export class Channels extends Lineage {
-    constructor(rootPerson, centerRoot=true, startGen=0, startSeq=1) {
+    constructor(rootPerson, centerRoot=true, branchKey=null, startGen=0, startSeq=1) {
         super(rootPerson, startGen, startSeq)
         this._data.channels = 0     // number of channels
         this._data.yearMax = 0      // earliest ancestral birth year
         this._data.yearMin = 9999   // last ancestral birth year
+        this._data.branchKey = branchKey
+        this._data.channelNodes = []    // trimmed nodes with channels
 
         this._addAncestorCounts(this.rootNode()) // Lineage class method
         this._decorateNodes()
+
+        // If just a specific branch is requested...
+        if (branchKey) this.trimNodes()
+
+        // Assign channels to each node
         this._data.channels = this._traverse(this.rootNode(), 0)
         if (centerRoot) this.centerRootChannel()
         // this._flipFathersChannels()
         // this.summary()
+    }
+
+    trimNodes() {
+        // Traverse backwards from branchNode to rootNode
+        let parent = this.findNodeByNameKey(this._data.branchKey)
+        while(parent.child) {
+            if (parent.child.father && parent.child.father !== parent) {
+                parent.child.father.father = null
+                parent.child.father.mother = null
+            } else if (parent.child.mother && parent.child.mother !== parent) {
+                parent.child.mother.father = null
+                parent.child.mother.mother = null
+            }
+            parent = parent.child
+        }
+        // Traverse forwards
+
     }
 
     //--------------------------------------------------------------------------
@@ -34,7 +58,14 @@ export class Channels extends Lineage {
 
     // Returns the number of channels in the Lineage
     channelMaxCount() { return this.data().channels }
+
+    // Returns array of {node} instances in father-descent-first traversal order
+    channelNodes() { return this.data().channelNodes }
     
+    // Returns array of {node} instances in lineage sequence order
+    // (root===1, father===2, mother===3, paternal grand father===4, etc)
+    channelNodesBySeq() { return this.channelNodes().sort((a, b) => { return a.seq - b.seq }) }
+
     summary() {
         console.log(`Channels Summary for subject '${this.rootPerson().label()}':`)
         console.log(`  - ${this.years()} years from ${this.yearMin()} - ${this.yearMax()} (grid cols))`)
@@ -99,6 +130,7 @@ export class Channels extends Lineage {
         } else if (node.mother) {
             chan = this._traverse(node.mother, channel)
         }
+        this._data.channelNodes.push(node)
         // console.log(`${channel}, next: ${chan}, ${node.person.label()}`)
         return chan
     }
