@@ -26,8 +26,20 @@ export function flagPinDefsGxml(w=100, h=100) {
     const tpath1 = {el: 'path', id: 'text-path-lower', d: 'M 2 45 A 45 45 0 1 0 98 45'}
     const tpath2 = {el: 'path', id: 'text-path-upper', d: 'M 5 75 A 45 45 0 1 1 95 75'}
 
+    // An arrowhead marker for timeline periods
+    const arrowhead = {el: 'marker',
+        id: "arrowhead",
+        viewBox: "0 0 10 10",
+        refX: 0, refY: 5,
+        markerWidth: 3,
+        markerHeight: 3,
+        fill: 'red',
+        opacity: 0.6,
+        orient: "auto-start-reverse", els: [
+            {el: 'path', d: "M 0 0 L 10 5 L 0 10 z"}]}
+
     const defs = {el: 'defs', id: 'flag-pins-defs', els: [
-        clip, tpath1, tpath2, filter,
+        clip, tpath1, tpath2, filter, arrowhead,
         belgium(w,h,0),
         canada(w,h,0),
         england(w,h,0),

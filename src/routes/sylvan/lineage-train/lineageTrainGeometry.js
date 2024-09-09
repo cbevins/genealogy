@@ -41,7 +41,7 @@ export function lineageTrainGeometry(nodes) { // width=1000, height=2000) {
     const femaleColor = "magenta"
     const maleColor = "blue"
     const fontSize = 16
-    const timelineHt = chanHt
+    const timelineHt = 2 * chanHt
 
     // Determine range of years, channels, generations for the nodes passed in,
     // which may differ from the Cahnnels.nodes
