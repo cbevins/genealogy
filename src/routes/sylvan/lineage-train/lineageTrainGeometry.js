@@ -44,7 +44,7 @@ export function lineageTrainGeometry(nodes) { // width=1000, height=2000) {
     const timelineHt = 2 * chanHt
 
     // Determine range of years, channels, generations for the nodes passed in,
-    // which may differ from the Cahnnels.nodes
+    // which may differ from the Channels.nodes
     const [birthMin, birthMax, chanMin, chanMax, genMin, genMax] = nodeRanges(nodes)
     const rows = chanMax - chanMin + 3  // 1 extra chanHt padding at top and bottom for links
     const yearMax = Math.trunc((birthMax+addYears) / yearsPerTic) * yearsPerTic

@@ -45,8 +45,7 @@ function trackPath(geom, x1, y1, x2, y2) {
 // Create Gxml for the content using its on user space based on geom
 export function lineageTrainChartGxml(geom) {
     // SVG wrapper for the chart and timelines
-    const content = {el: 'svg', width: geom.fullWd, height: geom.fullHt,
-        els: []}
+    const content = {el: 'svg', width: geom.fullWd, height: geom.fullHt, els: []}
 
     // Add <defs> for flags, paths, filters, lighting,
     // (flag defs are all preset at 100x100)
