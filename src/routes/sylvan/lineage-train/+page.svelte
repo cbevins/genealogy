@@ -1,6 +1,6 @@
 <script>
     import { Channels, Lineage } from '$lib/index.js'
-    import { gxmlStr, nest, register, textEl } from '$lib/index.js'
+    import { gxmlStr, nest } from '$lib/index.js'
     import { lineageTrainPosterGxml } from './lineageTrainPosterGxml.js'
     import { lineageTrainGeometry } from './lineageTrainGeometry.js'
     import H5c from '$lib/svelte/H.svelte'
@@ -8,10 +8,10 @@
 
     // BE SURE TO DEREFERENCE VALUE USING '$subjectNameKey'
     import { subjectPerson } from '$lib/sylvan/store.js'
-    console.clear()
     let ancestorKeys = []   // array of $subjectPerson ancestor {value:, name:} objects
     let ancestorKey = null  // nameKey string of current display ancestor
-    let posterGxml = null   // Gxml of poster created for subject-ancestor pair
+    let channels = null
+    let channelNodes = []
 
     const pageWds = [8.5, 11, 17, 34, 68]
     $: singlePage = true
@@ -21,23 +21,22 @@
     // 'subject' is a Person instance
     $: subject = changeSubject($subjectPerson) 
     // 'ancestorKey' is the nameKey of one of the subject's direct ancestors 
-    $: ancestorKey = changeAncestorKey(ancestorKey) 
-    $: channels = new Channels(subject, true, null)
-    $: channelNodes = channels.channelNodesBySeq()
-    $: displayGxml = createDisplayGxml(pageWd)
+    $: posterGxml = createPosterGxml($subjectPerson, ancestorKey) 
+    // $: channels = new Channels(subject, true, null)
+    // $: channelNodes = channels.channelNodesBySeq()
+    $: displayGxml = createDisplayGxml(posterGxml, pageWd)
 
-    function changeAncestorKey(a) {
-        console.log(`changeAncestorKey(${a})`)
-        channels = new Channels(subject, true, a)
+    function createPosterGxml(s, a) {
+        console.log(`createPosterGxml() for subject ${s.fullName()} ancestor(${a})`)
+        channels = new Channels(s, true, a)
         channelNodes = channels.channelNodesBySeq()
         const geom = lineageTrainGeometry(channelNodes)
         // console.log(geom)
-        posterGxml = lineageTrainPosterGxml(geom)
-        return a
+        return lineageTrainPosterGxml(geom)
     }
 
-    function createDisplayGxml(w) {
-        console.log(`createDisplayGxml() for page width ${w}`)
+    function createDisplayGxml(poster, displayWd) {
+        console.log(`createDisplayGxml() for display width ${displayWd}`)
         // If fitting entire chart on one page, determine its height
         if (singlePage) {
             const viewBox = `0 0 ${posterGxml.width} ${posterGxml.height}`
@@ -74,7 +73,6 @@
 
 <H5c>Lineage Train Map for Root Person: {subject.fullName()}</H5c>
 <H5c>{channelNodes.length} Routes Displayed for Ancestor: '{ancestorKey}'</H5c>
-<H5c>Page size is {pageWd}" by {pageHt.toFixed(2)}"</H5c>
 
 <Label>
     <Select class="mt-2" items={ancestorKeys} bind:value={ancestorKey} />
