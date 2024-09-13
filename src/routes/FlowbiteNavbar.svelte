@@ -31,6 +31,8 @@
     <NavHamburger />
     
     <NavUl {activeUrl}>
+        <NavLi href="/book" class="cursor-pointer">Book</NavLi>
+
         <NavLi class="cursor-pointer">
             Sylvan
             <ChevronDownOutline class="w-6 h-6 ms-1 text-primary-800 dark:text-white inline" />
