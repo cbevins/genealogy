@@ -12,7 +12,7 @@ import { US_History, US_Wars } from './timelineData.js'
 
 function ctext(x, y, size, content) { return text(x, y, size, content, 'middle') }
 
-function gen(node) {
+export function gen(node) {
     const gen = node.gen
     const female = node.person.isFemale()
     const p = female ? 'M' : 'F'
@@ -44,6 +44,21 @@ function trackPath(geom, x1, y1, x2, y2) {
 
 // Create Gxml for the content using its on user space based on geom
 export function lineageTrainChartGxml(geom) {
+
+    // Beginning of splitting into pages
+    // Still need to account for siblings' nodes
+    let ymax = 0
+    let ymin = 0
+    for(let i=0; i<geom.nodes.length; i++) {
+        ymax = Math.max(ymax, geom.nodes[i].y)
+        ymin = Math.min(ymin, geom.nodes[i].y)
+    }
+    const pageSize = ymax+100   // Use actual pageSize here, like 5000
+    const page = 0
+    const pageMin = page * pageSize
+    const pageMax = pageMin + pageSize 
+    // console.log('y range:', ymin, ymax)
+
     // SVG wrapper for the chart and timelines
     const content = {el: 'svg', width: geom.fullWd, height: geom.fullHt, els: []}
 
@@ -70,21 +85,25 @@ export function lineageTrainChartGxml(geom) {
     const trackWidth = 16
     for(let i=1; i<geom.nodes.length; i++) {
         const node = geom.nodes[i]
+        if (node.y >= pageMin && node.y<=pageMax) {
         const color = geom.color(node)
         if (node.child) {
             const path = trackPath(geom, node.x, node.y, node.child.x, node.child.y)
             chart.els.push(trainTracksGxml(path, trackWidth, color))
         }
     }
+    }
 
     // Add birth year flag pins and names to the chart
     // (node has {channel, birthCountry, birthState, birthYear, label, person} properties)
     for (let i=1; i<geom.nodes.length; i++) {
         const node = geom.nodes[i]
-        chart.els.push(trainStationGxml(node, geom,
+        if (node.y >= pageMin && node.y<=pageMax) {
+            chart.els.push(trainStationGxml(node, geom,
             geom.color(node), node.birthYear.toString(), gen(node)))
         chart.els.push(trackNameGxml(node, trackWidth, geom.fontSize))
         // console.log(i, node.seq, node.channel, node.y, node.label)
+        }
     }
     
     // Add subject and sibling birth year flag pins and names to the chart
