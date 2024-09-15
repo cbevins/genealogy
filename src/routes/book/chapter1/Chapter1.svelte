@@ -24,6 +24,42 @@
         'A Dose of English History',
         'Tribal Relations'
     ]
+
+    /* New Approach
+    <Intro>
+        <Page>
+            <ChapterHeading/>
+            ...text...
+        </Page>
+        <Page>
+    </Intro>
+    <BevinsBolt>
+        <Page>
+            <Section>
+            ...text page 1 of 1...
+            </Section>
+        </Page>
+        <Page> // Multiple Page per Section
+            <Section>
+            ...text page 1 of 2...
+            </Section>
+        <Page>
+        <Page>
+            ...text page 2 of 2...
+        <Page>
+        <Page>  // multiple Section per Page
+            <Section>
+                ...page text section 1 of 3...
+            </Section>
+            <Section>
+                ...page text section 2 of 3...
+            </Section>
+            <Section>
+                ...page text section 2 of 3...
+            </Section>
+    </BevinsBolt>
+
+    */
 </script>
 
 <Page pageno={pn} {margins}>

@@ -1,5 +1,6 @@
 <script>
     import P from '$lib/book/P.svelte'
+    import Page from '$lib/book/Page.svelte'
     import Section from '$lib/book/Section.svelte'
     export let id = ''
     const titles =[
@@ -32,5 +33,4 @@
 <P>
     I have not explored Mary’s lineage much further at this point.  A good starting place is Ramonabevins72 ‘Bevins Family Tree’.  She names her mother as Mary Starbuck, born about 1783 in Thornton, Leicestershire, and father as Simon Bork, born 15 Sep 1779 in Bardon, Leicestershire.
 </P>
-
 </Section>
